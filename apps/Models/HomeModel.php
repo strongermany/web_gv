@@ -1,7 +1,17 @@
 <?php   
-    class HomeModel{
+    class HomeModel extends BaseModel{
         public function __construct(){
-               echo"this is home model"; 
+               parent:: __construct();
+        }
+
+        public function category(){
+            $sql="Select  distinct * from sales order by Id_Cate desc";
+            $query = $this->db->query($sql);
+            $result = $query->fetchAll();
+            
+            
+            
+            return $result;
         }
     }
 

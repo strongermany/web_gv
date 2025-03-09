@@ -1,6 +1,8 @@
 <?php
     require_once('systems/Libs/Main.php');
     require_once('systems/Libs/BaseController.php');
+    require_once('systems/Libs/BaseModel.php');
+    require_once('systems/Libs/DataBase.php');
     require_once('systems/Libs/Load.php');
     
     $url = isset($_GET['url']) ? $_GET['url'] : NULL;
@@ -15,7 +17,7 @@
      //"url/class-0-/method/arg"
 
     if(isset($url[0])){
-        require_once('apps/Controller/'.$url[0].'.php');
+        require_once('apps/Controllers/'.$url[0].'.php');
         $ctrler = new $url[0]();
         if(isset($url[2])){
             $ctrler->{$url[1]}($url[2]);
