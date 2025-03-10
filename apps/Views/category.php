@@ -1,5 +1,4 @@
 <p>
-    <p>this is home page </p>
     Category:
     <?php
     

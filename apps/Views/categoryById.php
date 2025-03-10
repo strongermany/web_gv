@@ -1,10 +1,10 @@
 <p>
-    <p>this is home page </p>
     Category:
-    <?php
+        <?php
+        print_r($CategoryById);
     
-        if (!empty($Category) && is_array($Category)) {
-            foreach ($Category as $key => $value) {
+        if (!empty($CategoryById) && is_array($CategoryById)) {
+            foreach ($CategoryById as $key => $value) {
                 echo "<li>" . htmlspecialchars($value['Category']) . "</li>";
             }
         } else {

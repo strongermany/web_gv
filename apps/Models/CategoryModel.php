@@ -1,11 +1,12 @@
 <?php   
-    class HomeModel extends BaseModel{
+    class CategoryModel extends BaseModel{
         public function __construct(){
                parent:: __construct();
         }
 
         public function category($sales){
-            return $this->db->select($sales);
+            $sql="Select distinct * from $sales ";
+            return $this->db->select($sql);
             
         }
 
@@ -14,6 +15,14 @@
             $statement = $this->db->prepare($sql);
             $data =array(':id' =>$id);
             return $this->db->select($sql,$data);
+        }
+
+        public function InsertCategory($table,$data){
+            return $this->db->insert($table,$data);
+         
+     
+     
+
         }
     }
 
