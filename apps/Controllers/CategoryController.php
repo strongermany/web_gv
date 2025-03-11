@@ -49,8 +49,46 @@
                 
             }
             $this->load->view('addCategory',$message);
+        }
+        public function UpdateCategory(){
+            $CategoryModel = $this->load->model('CategoryModel'); 
+            $table = 'sales';
             
+            // $title = $_POST['title'];// Having the same name in form
+            // $description = $_POST['description'];
+            // 
+            $id = 2;
+            $cond= "sales.Id_cate='$id'";
+            $data = array(
+                'Category'=>"tra xanh 0 do ",
+                'Descript_Cate'=>"giai nhiet cot song"
+            );
+            $result= $CategoryModel->UpdateCategory($table,$data,$cond);//return 0 or 1.
+            if($result == 1 ){
+                echo 'Update data was successful';
+            }
+            else{
+                echo' Update data was unsuccessful';
+                
+            }
+        }
+        public function DeleteCategory(){
+            $CategoryModel = $this->load->model('CategoryModel'); 
+            $table = 'sales';
             
+            // $title = $_POST['title'];// Having the same name in form
+            // $description = $_POST['description'];
+            // 
+            $id = 2;
+            $cond= "sales.Id_cate='6'";
+            $result= $CategoryModel->DeleteCategory($table,$cond);//return 0 o
+            if($result == 1 ){
+                echo 'Delete data was successful';
+            }
+            else{
+                echo' Delete data was unsuccessful';
+                
+            }
         }
     }
 

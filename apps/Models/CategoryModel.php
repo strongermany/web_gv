@@ -19,10 +19,13 @@
 
         public function InsertCategory($table,$data){
             return $this->db->insert($table,$data);
-         
-     
-     
+        }
+        public function UpdateCategory($table,$data,$cond){
+            return $this->db->update($table,$data,$cond);
 
+        }
+        public function DeleteCategory($table,$cond){
+            return $this->db->delete($table,$cond);
         }
     }
 

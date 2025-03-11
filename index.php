@@ -1,9 +1,9 @@
 <?php
-    require_once('systems/Libs/Main.php');
-    require_once('systems/Libs/BaseController.php');
-    require_once('systems/Libs/BaseModel.php');
-    require_once('systems/Libs/DataBase.php');
-    require_once('systems/Libs/Load.php');
+    spl_autoload_register(function($class){
+        require_once('systems/Libs/'.$class.'.php');
+    });
+    require_once ('apps/config/config.php');
+
     
     $url = isset($_GET['url']) ? $_GET['url'] : NULL;
     if($url != NULL){

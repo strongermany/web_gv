@@ -1,4 +1,4 @@
-<form autocomplete="off" action="http://cafeweb.test/CategoryController/InsertCategory" method="POST"> 
+<form autocomplete="off" action="<?php echo Base_URL?>CategoryController/InsertCategory" method="POST"> 
     <?php  
         if(isset($msg)){// catch msg so use $msg not message.
             echo '<span style="color: blue;front-weight:bold;">'.$msg.'</span>';
