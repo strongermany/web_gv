@@ -7,6 +7,7 @@
             
         }
         public function index(){
+        
             return $this->homePage();
         }
         public function homePage() {
@@ -16,7 +17,6 @@
             $this->load->view('footer');
          }
         public function notFound(){
-       
        
             $this->load->view('header');
             $this->load->view('404'); 

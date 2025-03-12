@@ -50,6 +50,19 @@
             return $statement->execute();
 
         }
+        public function affectedRows($sql,$username,$password){// check fit with data basse or not;
+            $statement = $this->prepare($sql);
+            $statement->execute(array($username,$password));
+            return $statement->rowCount(); 
+        }
+
+        public function selectUser($sql,$username,$password){
+
+            $statement = $this->prepare($sql);
+            $statement->execute(array($username,$password));
+            return $statement->fetchAll(PDO::FETCH_ASSOC); 
+ 
+        }   
 
     
     }
