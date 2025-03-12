@@ -1,6 +1,6 @@
 <p>
     <p>this is home page </p>
-    Category:
+
     <?php
     
         if (!empty($Category) && is_array($Category)) {

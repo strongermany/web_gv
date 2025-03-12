@@ -6,10 +6,22 @@
             parent:: __construct();
             
         }
-
+        public function index(){
+            return $this->homePage();
+        }
         public function homePage() {
-            
-            $this->load->view('HomeView'); // Truyền $data vào view
+                   
+            $this->load->view('header');
+            $this->load->view('HomeView'); 
+            $this->load->view('footer');
+         }
+        public function notFound(){
+       
+       
+            $this->load->view('header');
+            $this->load->view('404'); 
+            $this->load->view('footer');
+
         }
 
     }
