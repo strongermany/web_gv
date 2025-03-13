@@ -1,7 +1,7 @@
 <?php
     class BaseModel{
 
-        protected $db = array();
+        protected $db ;
         
         public function __construct(){
             $connect = 'mysql:dbname=coffee_web; host=127.0.0.1';

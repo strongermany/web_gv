@@ -2,7 +2,7 @@
     
     class BaseController {
         
-        protected $load = array();
+        protected $load ;
 
         public function __construct() {
             $this->load = new Load();

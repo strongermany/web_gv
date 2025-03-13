@@ -24,7 +24,10 @@
 
         public function Dashboard(){
             Session::checkSession();
+            $this->load->view('cpanel/header');
+            $this->load->view('cpanel/menu');
             $this->load->view('cpanel/dashboard');
+            $this->load->view('cpanel/footer');
         }
         public function authentication_login(){
             $username = $_POST['username'];

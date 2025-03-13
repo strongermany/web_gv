@@ -5,16 +5,14 @@
         }
 
         public function category($sales){
-            $sql="Select distinct * from $sales ";
+            $sql="Select distinct * from $sales Order by Id_Cate Desc";
             return $this->db->select($sql);
             
         }
 
-        public function cateByID($table,$id){
-            $sql="Select distinct * from $table where Id_Cate=:id";
-            $statement = $this->db->prepare($sql);
-            $data =array(':id' =>$id);
-            return $this->db->select($sql,$data);
+        public function cateByID($table,$cond){
+            $sql="Select distinct * from $table Where $cond";
+            return $this->db->select($sql);
         }
 
         public function InsertCategory($table,$data){
