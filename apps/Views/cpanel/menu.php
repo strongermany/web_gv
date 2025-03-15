@@ -14,11 +14,24 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Blogs
+                        Category Blogs
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="<?php echo Base_URL ?>PostController/">Add</a></li>
                         <li><a class="dropdown-item" href="<?php echo Base_URL ?>PostController/list_category_post">List</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         Blogs
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="<?php echo Base_URL ?>PostController/add_post">Add</a></li>
+                        <li><a class="dropdown-item" href="<?php echo Base_URL ?>PostController/list_post">List</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -45,7 +58,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="<?php echo Base_URL?>ProductController/add_product">Add</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="<?php echo Base_URL?>ProductController/list_product">List</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

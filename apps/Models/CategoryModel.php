@@ -52,6 +52,26 @@
         public function InsertProduct($table, $data){
             return $this->db->insert($table,$data);
         }
+        public function product($table_product,$table_category){
+            $sql="Select distinct * from $table_product,$table_category 
+            where $table_product.Id_category_product =$table_category.Id_Cate 
+            Order by Id_product Desc";
+            return $this->db->select($sql);
+            
+        }
+        public function DeleteProduct($table,$cond)
+        {
+            return $this->db->delete($table,$cond);
+        }
+        public function productByID($table,$cond){
+            $sql="Select distinct * from $table Where $cond";
+            return $this->db->select($sql);
+        }
+        public function UpdateProduct($table,$data,$cond){
+            return $this->db->update($table,$data,$cond);
+
+        }
+        
 
 
     }
