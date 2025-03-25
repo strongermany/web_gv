@@ -1,43 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Sigmar&display=swap");
+
 * {
-  font-family: "Nunito", sans-serif;
+ 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
   border: none;
   text-decoration: none;
-  transition: all 0.2s linear;
-  text-transform: capitalize;
+  
+  
 }
 
-.navbar .logo {
-  font-family: "Oswald", sans-serif;
-  color: #fff;
-  font-weight: 600;
-  font-size: 2.1rem;
-  text-decoration: none;
-}
-.navbar .logo span {
-  color: #c06b3e;
-}
-/* .navbar .menu-links {
-  display: flex;
-  list-style: none;
-  gap: 35px;
-} */
- .navbar a {
-  font-family: "Oswald", sans-serif;
-  line-height: 1.2; /* Khoảng cách giữa các dòng chữ */
-  color: #0e0d0d;
-  font-size: 15px;
-  text-decoration: none;
-  transition: 0.2s ease;
-} 
-.navbar a:hover {
-  color: #c06b3e;
-}
+
 
 html {
   font-size: 62.5%;
@@ -48,6 +22,7 @@ html {
 
 .container {
   max-width: 1200px;
+  font-size: 1.6rem;
   margin: 0 auto;
   padding: 3rem 2rem;
 }
@@ -225,73 +200,6 @@ html {
   }
 }
 
-.navbar-nav .nav-link {
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #000000;
-  margin: 0 10px;
-}
-.navbar-nav .nav-link:hover {
-  color: #c49a6c;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-}
-
-nav ul li {
-  margin-right: 10px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #333;
-}
-
-nav ul li.divider {
-  width: 1px;
-  height: 20px;
-  background-color: #ccc;
-  margin: 0 10px;
-}
-
-.navbar-logo {
-  transform: scale(0.95);
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  background-color: #c49a6c; /* Màu nền navbar (thay bằng mã màu bạn muốn) */
-  padding: 10px 15px;
-}
-
-.navbar-logo {
-  height: 40px; /* Điều chỉnh kích thước logo */
-  width: auto; /* Giữ tỷ lệ logo */
-  margin-right: 10px; /* Khoảng cách giữa logo và divider */
-}
-
-.divider {
-  width: 3px; /* Độ rộng của vạch chia */
-  height: 20px; /* Chiều cao của vạch chia */
-  background-color: #ccc; /* Màu của vạch chia */
-  margin-right: 10px; /* Khoảng cách giữa divider và chữ */
-}
-
-.navbar-brand {
-  font-size: 16px; /* Kích thước chữ */
-  line-height: 1.2; /* Khoảng cách giữa các dòng chữ */
-  margin: 0; /* Loại bỏ margin mặc định */
-  padding: 0; /* Loại bỏ padding mặc định */
-}
-
-.icon-color {
-  color: rgb(0, 0, 0); /* Đổi màu icon thành đỏ */
-}
 
 .hr-container {
   display: flex;

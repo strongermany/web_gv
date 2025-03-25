@@ -12,13 +12,13 @@
         }
         public function login() {
                    
-            $this->load->view('header');
+           
             session::init();
             if(Session::get('login')== true){
                 header("Location:".Base_URL."LoginController/Dashboard");
             }
             $this->load->view('cpanel/login'); 
-            $this->load->view('footer');
+            
          }
 
 

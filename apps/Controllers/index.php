@@ -23,8 +23,8 @@ class index extends BaseController
 
     public function category(){
         $this->load->view('header');
-        $this->load->view('slider');
-        // $this->load->view('categoryProduct');
+        // $this->load->view('slider');
+        $this->load->view('categoryProduct');
         $this->load->view('footer');
     }
     public function notFound()
@@ -32,6 +32,13 @@ class index extends BaseController
 
         $this->load->view('header');
         $this->load->view('404');
+        $this->load->view('footer');
+    }
+
+    public function detailsProduct(){
+        $this->load->view('header');
+        $this->load->view('slider');
+        $this->load->view('detailsProduct');
         $this->load->view('footer');
     }
 }

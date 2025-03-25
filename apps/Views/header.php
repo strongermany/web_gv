@@ -23,7 +23,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Coiny&family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Sigmar&display=swap" rel="stylesheet">
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Coiny&family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Sigmar&display=swap" rel="stylesheet"> -->
 
     <title>TRANG CHỦ</title>
 </head>
@@ -43,9 +44,9 @@
 
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo Base_URL?>index">Trang chủ</a>
+                        <a class="nav-link active" href="<?php echo Base_URL ?>index">Trang chủ</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo Base_URL?>index/category">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo Base_URL ?>index/category">Menu</a></li>
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"
@@ -81,16 +82,13 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Đặt hàng </a></li>
+
                     <li class="nav-item"><a class="nav-link" href="#">Cửa hàng</a></li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#"><i class="material-icons icon-color">menu</i></a>
-                    </li>
+                    
+                </ul>
+
 
             </div>
         </div>
     </nav>
 </header>
-
-
-   
