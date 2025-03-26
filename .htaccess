@@ -1,4 +1,5 @@
-RewriteEngine On
+
+RewriteEngine on
 
 # Nếu không phải là thư mục
 RewriteCond %{REQUEST_FILENAME} !-d

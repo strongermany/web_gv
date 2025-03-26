@@ -1,3 +1,3 @@
 <?php
-    define('Base_URL','http://cafeweb.test/');
+    define('Base_URL','http://localhost/cafeweb/');
 ?>

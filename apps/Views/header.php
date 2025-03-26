@@ -46,7 +46,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="<?php echo Base_URL ?>index">Trang chủ</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo Base_URL ?>index/category">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost/cafeweb/index/category">Menu</a></li>
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"
