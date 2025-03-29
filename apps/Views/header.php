@@ -46,7 +46,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="<?php echo Base_URL ?>index">Trang chủ</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="http://localhost/cafeweb/index/category">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo Base_URL ?>index/category">Menu</a></li>
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"
@@ -63,24 +63,8 @@
                             <li><a class="dropdown-item" href="#">Dụng cụ </a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="pagesDropdown"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Tư liệu
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <li><a class="dropdown-item" href="#">Phân biệt hạt cafe</a></li>
-                            <li><a class="dropdown-item" href="#">Lịch sử hình thành quán</a></li>
-                            <li>
-                                <a class="dropdown-item" href="#">Quy trình sản xuất</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo Base_URL?>NewsController">Tin tức </a></li>
+
                     <li class="nav-item"><a class="nav-link" href="#">Đặt hàng </a></li>
 
                     <li class="nav-item"><a class="nav-link" href="#">Cửa hàng</a></li>
