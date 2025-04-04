@@ -9,6 +9,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css">
     <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/style.css" />
@@ -17,10 +18,6 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Coiny&family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Sigmar&display=swap" rel="stylesheet"> -->
-
     <title>TRANG CHỦ</title>
 </head>
 <header>

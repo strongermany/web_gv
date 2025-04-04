@@ -23,7 +23,7 @@ class index extends BaseController
 
     public function category(){
         $this->load->view('header');
-        // $this->load->view('slider');
+        $this->load->view('slider');
         $this->load->view('categoryProduct');
         $this->load->view('footer');
     }

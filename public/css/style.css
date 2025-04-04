@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Coiny&family=Lora:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Sigmar&display=swap");
 .navbar-nav .nav-link {
   font-weight: bold;
   text-transform: uppercase;
@@ -266,7 +266,7 @@ nav ul li.divider {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Coiny", sans-serif;
 }
 body {
   background-color: #f0f0f0;
