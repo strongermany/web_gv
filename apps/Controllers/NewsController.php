@@ -17,7 +17,7 @@ class NewsController extends BaseController
 
         $this->load->view('header');
         $this->load->view('slider');
-        $this->load->view('categoryPost');
+        $this->load->view('mainBlog');
         $this->load->view('footer');
     }
 

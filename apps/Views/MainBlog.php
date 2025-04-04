@@ -1,4 +1,5 @@
 <section id="blog">
+    <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/mainBlog.css" />
     <div class="blog-heading">
         <strong>Recent Blog</strong>
         <h3>Our Blog</h3>
