@@ -9,7 +9,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css">
     <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/style.css" />
@@ -46,8 +46,11 @@
                             <li><a class="dropdown-item" href="#">Dụng cụ </a></li>
                         </ul>
                     </li>
+
                     <li class="nav-item"><a class="nav-link" href="<?php echo Base_URL?>NewsController">Tin tức </a>
                     </li>
+
+                    
 
                     <li class="nav-item"><a class="nav-link" href="#">Đặt hàng </a></li>
 
