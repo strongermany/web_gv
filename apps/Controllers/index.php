@@ -1,44 +1,15 @@
 <?php
-class index extends BaseController
-{
-
-
-    public function __construct()
-    {
-        parent::__construct();
+    class index extends DController {
+        public function __construct() {
+            parent::__construct();
+            
+        }
+        public function index(){
+            $this->homePage();
+        }
+        public function homePage(){
+            //$this->load->model('HomeModel');
+            $this->load->view('homePage');
+        }
     }
-    public function index()
-    {
-
-        return $this->homePage();
-    }
-    public function homePage()
-    {
-
-        $this->load->view('header');
-        $this->load->view('slider');
-        $this->load->view('HomeView');
-        $this->load->view('footer');
-    }
-
-    public function category(){
-        $this->load->view('header');
-        $this->load->view('slider');
-        $this->load->view('categoryProduct');
-        $this->load->view('footer');
-    }
-    public function notFound()
-    {
-
-        $this->load->view('header');
-        $this->load->view('404');
-        $this->load->view('footer');
-    }
-
-    public function detailsProduct(){
-        $this->load->view('header');
-        $this->load->view('slider');
-        $this->load->view('detailsProduct');
-        $this->load->view('footer');
-    }
-}
+?>

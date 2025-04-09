@@ -1,5 +1,5 @@
 <?php
-    class BaseModel{
+    class DModel{
 
         protected $db ;
         

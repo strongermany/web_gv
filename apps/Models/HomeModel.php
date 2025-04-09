@@ -1,20 +1,16 @@
-<?php   
-    class HomeModel extends BaseModel{
+<?php
+    class HomeModel extends DModel{
         public function __construct(){
-               parent:: __construct();
+            parent::__construct();
+            echo "HomeModel class loaded<br>";
         }
-
-        public function category($sales){
-            return $this->db->select($sales);
-            
-        }
-
-        public function cateByID($table,$id){
-            $sql="Select distinct * from $table where Id_Cate=:id";
-            $statement = $this->db->prepare($sql);
-            $data =array(':id' =>$id);
-            return $this->db->select($sql,$data);
+        
+        public function getData(){
+            $data = array(
+                'title' => 'Home Page',
+                'content' => 'Welcome to the home page!'
+            );
+            return $data;
         }
     }
-
 ?>

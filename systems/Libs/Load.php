@@ -1,19 +1,19 @@
 <?php
-    class Load{
-        public function __construct(){
 
-        }
+class Load
+{
+    public function __construct() {
 
-        public function view($fileName,$data = false){
-            if($data == true){
-                extract($data);
-            }
-            include 'apps/Views/'.$fileName.'.php';
-        }
-        public function model($fileName){
-            include 'apps/Models/'.$fileName.'.php';
-            return new $fileName();
-        }
     }
 
+    public function view($FileName)
+    {
+        include 'apps/Views/'. $FileName . '.php';
+    }
+    public function model($FileName)
+    {
+        include 'apps/Models/' . $FileName . '.php';
+        return new $FileName();
+    }
+}
 ?>
