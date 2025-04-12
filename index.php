@@ -11,7 +11,8 @@
         include_once 'systems/Libs/DController.php';
         include_once 'systems/Libs/DModel.php';
         include_once 'systems/Libs/Load.php';
-       
+        include_once 'systems/Libs/DataBase.php';
+        include_once 'apps/config/config.php';
 
         //$main = new Main();
         
