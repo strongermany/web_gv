@@ -2,67 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instructor Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/styles.css">
-    <style>
-        .dropdown-menu {
-            z-index: 9999;
-            position: absolute !important;
-            display: block !important;
-        }
-    </style>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<?php echo Base_URL?>public/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <title>Document</title>
 </head>
 
 <body>
-    <header class="bg-primary text-white py-3">
-        <div class="container">
-            <h1 class="text-center">Instructor Dashboard</h1>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link" href="homePage.php">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="uploadDocuments.php">Upload Documents</a></li>
-                            <li class="nav-item"><a class="nav-link" href="enterGrades.php">Enter Grades</a></li>
-                            <li class="nav-item"><a class="nav-link" href="takeAttendance.php">Take Attendance</a></li>
-                            <li class="nav-item"><a class="nav-link" href="login.php">Logout</a></li>
-                            <!-- Dropdown for Class Types -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="classDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select Class
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="classDropdown">
-                                    <?php if (!empty($list) && is_array($list)): ?>
-                                        <?php foreach ($list as $value): ?>
-                                            <li>
-                                                <a class="dropdown-item" href="classDetails.php?id=<?php echo htmlspecialchars($value['Id_class']); ?>">
-                                                    <?php echo htmlspecialchars($value['Name_class']); ?>
-                                                </a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <li><span class="dropdown-item text-muted">No classes available</span></li>
-                                    <?php endif; ?>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="<?php echo Base_URL?>public/images/tdtulogo.webp" /></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="">TRANG CHỦ</a></li>
+                    <li><a href="">THÔNG BÁO</a></li>
+                    <li><a href="">LỚP HỌC</a></li>
+                    <li><a href="">ĐIỂM DANH</a></li>
+                    <li><a href="">ĐĂNG NHẬP</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Ton Duc Thang University</h1>
+            <p>
+                Trường Đại học Tôn Đức Thắng không ngừng phát triển vững mạnh, thông
+                qua các hoạt động ghi nhận hàng năm <br />và kết quả xếp hạng, uy tín
+                của cơ sở giáo dục trong cộng đồng xã hội, trên bản đồ giáo dục Việt
+                Nam và thế giới.
+            </p>
+            <a href="" class="hero-btn">Visit Us</a>
         </div>
-    </header>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </section>
 </body>
-
-</html>

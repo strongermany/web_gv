@@ -1,13 +1,11 @@
-<footer>
-    <div class="container">
-        <p>&copy; <?php echo date("Y"); ?> Your Institution Name. All rights reserved.</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="homePage.php">Home</a></li>
-            <li class="list-inline-item"><a href="login.php">Login</a></li>
-            <li class="list-inline-item"><a href="uploadDocuments.php">Upload Documents</a></li>
-            <li class="list-inline-item"><a href="enterGrades.php">Enter Grades</a></li>
-            <li class="list-inline-item"><a href="takeAttendance.php">Take Attendance</a></li>
-        </ul>
+<section class="footer">
+    <h4>About Us</h4>
+    <p>Liên hệ</p>
+    <h3>TDT University</h3>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-solid fa-square-envelope"></i>
     </div>
-</footer>
-<script src="<?php echo Base_URL ?>public/js/scripts.js"></script>
+    <p>Made with TDT University</p>
+</section>

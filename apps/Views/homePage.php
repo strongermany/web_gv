@@ -1,47 +1,51 @@
-
-
-<div class="container mt-5">
-    <div class="text-center">
-        <h2 class="mb-4">Welcome to the Instructor Dashboard</h2>
-        <p class="lead">Select an option below to get started:</p>
-    </div>
-    <div class="row mt-4">
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Upload Documents</h5>
-                    <p class="card-text">Upload course materials and resources for students.</p>
-                    <a href="uploadDocuments.php" class="btn btn-primary">Go</a>
-                </div>
-            </div>
+<section class="course">
+      <h1>THÔNG BÁO MỚI NHẤT</h1>
+      <p>Đại học Tôn Đức Thắng</p>
+      <div class="row">
+        <div class="course-col">
+          <h3>Mạng máy tính</h3>
+          <p>Ton Duc Thang University</p>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Enter Grades</h5>
-                    <p class="card-text">Record and manage student grades efficiently.</p>
-                    <a href="enterGrades.php" class="btn btn-primary">Go</a>
-                </div>
-            </div>
+        <div class="course-col">
+          <h3>Lập trình web</h3>
+          <p>Ton Duc Thang University</p>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Take Attendance</h5>
-                    <p class="card-text">Mark attendance for your classes quickly.</p>
-                    <a href="takeAttendance.php" class="btn btn-primary">Go</a>
-                </div>
-            </div>
+        <div class="course-col">
+          <h3>AI</h3>
+          <p>Ton Duc Thang University</p>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Logout</h5>
-                    <p class="card-text">Sign out of your instructor account securely.</p>
-                    <a href="login.php" class="btn btn-danger">Logout</a>
-                </div>
-            </div>
+      </div>
+    </section>
+    <section class="campus">
+      <h1>MÔN HỌC QUẢN LÝ</h1>
+      <p>TDT University</p>
+      <div class="row">
+        <div class="campus-col">
+          <img src="<?php echo Base_URL?>public/images/th.jpg" />
+          <div class="layer">
+            <h3>Mạng máy tính</h3>
+          </div>
         </div>
-    </div>
-</div>
-
+        <div class="campus-col">
+          <img src="<?php echo Base_URL?>public/images/th.jpg" />
+          <div class="layer">
+            <h3>AI</h3>
+          </div>
+        </div>
+        <div class="campus-col">
+          <img src="<?php echo Base_URL?>public/images/th.jpg" />
+          <div class="layer">
+            <h3>Web</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      var navLinks = document.getElementById("navLinks");
+      function showMenu() {
+        navLinks.style.right = "0";
+      }
+      function hideMenu() {
+        navLinks.style.right = "-200px";
+      }
+    </script>

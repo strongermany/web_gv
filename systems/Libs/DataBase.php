@@ -1,5 +1,5 @@
 <?php
-    class Database extends PDO {
+    class DataBase extends PDO {
         public function __construct($connect,$user,$pass){
                parent::__construct($connect,$user,$pass);
         }

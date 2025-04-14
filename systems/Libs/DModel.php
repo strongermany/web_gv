@@ -1,5 +1,5 @@
 <?php
-    class DModel{
+    class DModel {
 
         protected $db ;
         
@@ -7,7 +7,7 @@
             $connect = 'mysql:dbname=lecturer; host=127.0.0.1';
             $user='root';
             $pass ='';
-            $this->db = new DataBase($connect,$user,$pass);
+            $this->db = new Database($connect,$user,$pass);
 
         }
     }
