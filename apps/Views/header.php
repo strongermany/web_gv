@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="<?php echo Base_URL?>public/css/styles.css" />
+    <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,15 +22,36 @@
 <body>
     <section class="header">
         <nav>
-            <a href="index.html"><img src="<?php echo Base_URL?>public/images/tdtulogo.webp" /></a>
+            <a href="index.html"><img src="<?php echo Base_URL ?>public/images/tdtulogo.webp" /></a>
             <div class="nav-links" id="navLinks">
                 <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                 <ul>
                     <li><a href="">TRANG CHỦ</a></li>
                     <li><a href="">THÔNG BÁO</a></li>
-                    <li><a href="">LỚP HỌC</a></li>
+                    <li class="dropdown">
+                        <a href="#">LỚP HỌC</a>
+                        <ul class="dropdown-menu">
+                            <?php if (!empty($list) && is_array($list)): ?>
+                                <div class="dropdown mb-4">
+                                  
+                                    <select id="classDropdown" class="form-select">
+                                        <?php foreach ($list as $key => $value): ?>
+                                            <?php
+                                            $name = htmlspecialchars($value['Name_class']);
+                                            $id = htmlspecialchars($value['Id_class']);
+                                            ?>
+                                            <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            <?php else: ?>
+                                <li><a href="#">No classes available</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
                     <li><a href="">ĐIỂM DANH</a></li>
-                    <li><a href="">ĐĂNG NHẬP</a></li>
+                    <li><a href="<?php echo Base_URL ?>index/logout">ĐĂNG XUẤT</a></li>
+
                 </ul>
             </div>
             <i class="fa-solid fa-bars" onclick="showMenu()"></i>
