@@ -1,16 +1,12 @@
-<?php
-    if (!empty($list) && is_array($list)) {
-        echo '<div class="dropdown mb-4">';
-        echo '<label for="classDropdown" class="form-label">Select a Class:</label>';
-        echo '<select id="classDropdown" class="form-select">';
-        foreach ($list as $key => $value) {
-            $name = htmlspecialchars($value['Name_class']);
-            $id = htmlspecialchars($value['Id_class']);
-            echo '<option value="' . $id . '">' . $name . '</option>';
-        }
-        echo '</select>';
-        echo '</div>';
-    } else {
-        echo '<p>No classes available.</p>';
-    }
-?>
+<section class="students">
+        <h1>DANH SÁCH SINH VIÊN</h1>
+        <ul>
+            <?php if (!empty($std)) : ?>
+                <?php foreach ($std as $student) : ?>
+                    <li><?php echo htmlspecialchars($student['Name_std']); ?></li>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <li>Không có sinh viên nào.</li>
+            <?php endif; ?>
+        </ul>
+    </section>

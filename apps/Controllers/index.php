@@ -55,18 +55,9 @@ class index extends DController
     }
 
    
-    public function classById()
-    {
+    
 
-        $homemodel = $this->load->model('HomeModel');
-
-        $data['list'] = $homemodel->listClass('tbl_class_object');
-
-        $this->load->view('header');
-
-        $this->load->view('listClass', $data);
-        $this->load->view('footer');
-    }
+    
     public function notFound()
     {
 

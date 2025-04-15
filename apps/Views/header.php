@@ -29,21 +29,29 @@
                     <li><a href="">TRANG CHỦ</a></li>
                     <li><a href="">THÔNG BÁO</a></li>
                     <li class="dropdown">
-                        <a href="#">LỚP HỌC</a>
+                        <a href="#">MÔN HỌC</a>
                         <ul class="dropdown-menu">
                             <?php if (!empty($list) && is_array($list)): ?>
-                                <div class="dropdown mb-4">
-                                  
-                                    <select id="classDropdown" class="form-select">
-                                        <?php foreach ($list as $key => $value): ?>
-                                            <?php
-                                            $name = htmlspecialchars($value['Name_class']);
-                                            $id = htmlspecialchars($value['Id_class']);
-                                            ?>
-                                            <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
+                                <select id="classDropdown" class="form-select" onchange="redirectToClass(this.value)">
+                                    <option value="">Chọn lớp</option> <!-- Tùy chọn mặc định -->
+                                    <?php foreach ($list as $key => $value): ?>
+                                        <?php
+                                        $name = htmlspecialchars($value['Name_class']);
+                                        $id = htmlspecialchars($value['Id_class']);
+                                        ?>
+                                        <option value="<?php echo Base_URL ?>ListClassController/listClass/<?php echo $id; ?>">
+                                            <?php echo $name; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <script>
+                                    function redirectToClass(url) {
+                                        if (url) {
+                                            window.location.href = url; // Chuyển hướng đến URL được chọn
+                                        }
+                                    }
+                                </script>
                             <?php else: ?>
                                 <li><a href="#">No classes available</a></li>
                             <?php endif; ?>

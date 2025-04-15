@@ -21,10 +21,13 @@ class HomeController extends DController
         $homemodel = $this->load->model('HomeModel');
 
         $data['list'] = $homemodel->listClass('tbl_class_object');
+      
 
-        // Remove var_dump and exit
+        //var_dump($data['std']);
         $this->load->view('header', $data);
         $this->load->view('homePage');
         $this->load->view('footer');
     }
+
+    
 }
