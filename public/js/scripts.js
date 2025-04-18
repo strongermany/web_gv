@@ -61,3 +61,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Navigation menu
+var navLinks = document.getElementById("navLinks");
+
+function showMenu() {
+    navLinks.style.right = "0";
+}
+
+function hideMenu() {
+    navLinks.style.right = "-200px";
+}
+
+// Handle dropdown menu
+function toggleDropdown(event) {
+    event.stopPropagation();
+    var dropdown = document.querySelector('.profile-dropdown');
+    dropdown.classList.toggle('show');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    var dropdown = document.querySelector('.profile-dropdown');
+    var avatar = document.querySelector('.admin-profile img');
+    if (!dropdown.contains(event.target) && !avatar.contains(event.target)) {
+        dropdown.classList.remove('show');
+    }
+});
+
+// Class dropdown redirect
+function redirectToClass(url) {
+    if (url) {
+        window.location.href = url;
+    }
+}

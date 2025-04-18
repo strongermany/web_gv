@@ -26,40 +26,17 @@
             <div class="nav-links" id="navLinks">
                 <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                 <ul>
-                    <li><a href="">TRANG CHỦ</a></li>
-                    <li><a href="">THÔNG BÁO</a></li>
-                    <li class="dropdown">
-                        <a href="#">MÔN HỌC</a>
-                        <ul class="dropdown-menu">
-                            <?php if (!empty($list) && is_array($list)): ?>
-                                <select id="classDropdown" class="form-select" onchange="redirectToClass(this.value)">
-                                    <option value="">Chọn lớp</option> <!-- Tùy chọn mặc định -->
-                                    <?php foreach ($list as $key => $value): ?>
-                                        <?php
-                                        $name = htmlspecialchars($value['Name_class']);
-                                        $id = htmlspecialchars($value['Id_class']);
-                                        ?>
-                                        <option value="<?php echo Base_URL ?>ListClassController/listClass/<?php echo $id; ?>">
-                                            <?php echo $name; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-
-                                <script>
-                                    function redirectToClass(url) {
-                                        if (url) {
-                                            window.location.href = url; // Chuyển hướng đến URL được chọn
-                                        }
-                                    }
-                                </script>
-                            <?php else: ?>
-                                <li><a href="#">No classes available</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
+                    <li><a href="<?php echo Base_URL ?>HomeController">TRANG CHỦ</a></li>
+                    <li><a href="<?php echo Base_URL ?>LessionController">THÔNG BÁO</a></li>
                     <li><a href="">ĐIỂM DANH</a></li>
-                    <li><a href="<?php echo Base_URL ?>index/logout">ĐĂNG XUẤT</a></li>
-
+                    <li><a href="">Lịch Dạy </a></li>
+                    <li class="admin-profile">
+                        <img src="<?php echo Base_URL ?>public/images/avatar.jpg" alt="Admin Avatar" onclick="toggleDropdown(event)">
+                        <div class="profile-dropdown">
+                            <a href="#"><i class="fa-solid fa-key"></i></a>
+                            <a href="<?php echo Base_URL ?>index/logout"><i class="fa-solid fa-right-from-bracket"></i> đăng xuất</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <i class="fa-solid fa-bars" onclick="showMenu()"></i>
@@ -75,4 +52,8 @@
             <a href="" class="hero-btn">Visit Us</a>
         </div>
     </section>
+
+    <!-- Add scripts.js at the end of body -->
+    <script src="<?php echo Base_URL ?>public/js/scripts.js"></script>
 </body>
+</html>

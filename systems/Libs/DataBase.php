@@ -5,17 +5,13 @@
         }
     
         // Do not know how many arguments
-        public function select($sql,$data = array(),$fetchStyle = PDO::FETCH_ASSOC){
-                
+        public function select($sql, $data = array(), $fetchStyle = PDO::FETCH_ASSOC){
             $statement = $this->prepare($sql);
             foreach($data as $key => $value){
-                $statement->bindValue($key,$value);
+                $statement->bindValue($key + 1, $value);
             }
-
-            
             $statement->execute();
-            return $statement->fetchAll(); 
-            
+            return $statement->fetchAll($fetchStyle); 
         }
         public function insert($table ,$data){
             $keys = implode(",",array_keys($data));

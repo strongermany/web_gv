@@ -20,7 +20,7 @@ class HomeController extends DController
     {
         $homemodel = $this->load->model('HomeModel');
 
-        $data['list'] = $homemodel->listClass('tbl_class_object');
+        $data['list'] = $homemodel->listClass('tbl_object');
       
 
         //var_dump($data['std']);

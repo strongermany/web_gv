@@ -257,10 +257,13 @@
     left: 50%;
     transform: translateX(-50%);
     padding: 8px;
+    transition: all 0.3s ease;
   }
   
   .dropdown:hover .dropdown-menu {
     display: block;
+    opacity: 1;
+    visibility: visible;
   }
   
   .form-select {
@@ -313,6 +316,93 @@
     
     .no-classes {
         color: #fff;
+    }
+  }
+  
+  /* Admin profile styles */
+  .admin-profile {
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .admin-profile img {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 4px;
+    padding: 8px;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    min-width: 120px;
+    text-align: left;
+    margin-top: 5px;
+    z-index: 1000;
+  }
+  
+  .profile-dropdown.show {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  
+  .profile-dropdown a {
+    color: #666;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 13px;
+  }
+  
+  .profile-dropdown i {
+    font-size: 15px;
+    margin-right: 8px;
+    width: 16px;
+  }
+  
+  .profile-dropdown a:hover {
+    background: #f44336;
+    color: white;
+  }
+  
+  @media (max-width: 700px) {
+    .profile-dropdown {
+        background: transparent;
+        box-shadow: none;
+        position: static;
+        margin-top: 0;
+    }
+    
+    .profile-dropdown a {
+        color: white;
+        padding: 8px 0;
+    }
+    
+    .profile-dropdown a:hover {
+        background: transparent;
+        color: #f44336;
     }
   }
   

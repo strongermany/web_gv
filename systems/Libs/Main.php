@@ -1,34 +1,26 @@
 <?php
     class Main{
-
-
-        public  $url = "index";
+        /** @var array */
+        public $url = ["index"];
         public $controllerName = "index";
-        public $methodName="index";
-        public $controllerPath ="apps/Controllers/";
+        public $methodName = "index";
+        public $controllerPath = "apps/Controllers/";
         public $controller;
 
         public function __construct(){
             $this->getUrl();
             $this->loadController();
             $this->callMethod();
-            
         }
+
         public function getUrl(){
-            
-            $this->url = isset($_GET['url']) ? $_GET['url'] : NULL;
-            
-            if ($this->url !== NULL) {
-               
-                $this->url = rtrim($this->url, '/'); // Xóa dấu `/` cuối cùng
-                $this->url = explode('/', filter_var($this->url, FILTER_SANITIZE_URL)); 
-            } 
-            else {
-                $this->url = ["index"]; // Gán mặc định là ["index"] nếu không có URL
-                
+            if (isset($_GET['url'])) {
+                $url = rtrim($_GET['url'], '/');
+                $parts = explode('/', filter_var($url, FILTER_SANITIZE_URL));
+                if (!empty($parts)) {
+                    $this->url = $parts;
+                }
             }
-            
-              
         }
         
         public function loadController(){
@@ -56,35 +48,33 @@
         public function callMethod(){
             if (!is_object($this->controller)) {
                 header("Location:".Base_URL."index/notFound");
+                return;
             }
-            if(isset($this->url[2])){
-                
-                $this->methodName=$this->url[1];
-                if(method_exists($this->controller,$this->methodName)){
-                    $this->controller->{$this->methodName}($this->url[2]);
-                }else{
-                    header("Location:".Base_URL."index/notFound");
 
-                }
-            }else{
+            // Nếu có method name trong URL
+            if(isset($this->url[1])){
+                $this->methodName = $this->url[1];
                 
-                if(isset($this->url[1])){
+                if(method_exists($this->controller, $this->methodName)){
+                    // Lấy tất cả các tham số từ URL (bỏ qua controller và method)
+                    $params = array_slice($this->url, 2);
                     
-                    $this->methodName=$this->url[1];
-                    if(method_exists($this->controller,$this->methodName)){
+                    if(count($params) > 0){
+                        // Gọi method với các tham số
+                        call_user_func_array(array($this->controller, $this->methodName), $params);
+                    } else {
+                        // Gọi method không có tham số
                         $this->controller->{$this->methodName}();
                     }
-                    else{
-                        header("Location:".Base_URL."index/notFound");
-                    }
+                } else {
+                    header("Location:".Base_URL."index/notFound");
                 }
-                else {
-                    
-                    if (method_exists($this->controller, "index")) {
-                        $this->controller->index(); // Gọi trực tiếp hàm index() thay vì chuyển hướng
-                    } else {
-                        header("Location:".Base_URL."index/notFound");
-                    }
+            } else {
+                // Không có method name, gọi index
+                if(method_exists($this->controller, "index")){
+                    $this->controller->index();
+                } else {
+                    header("Location:".Base_URL."index/notFound");
                 }
             }
         }
