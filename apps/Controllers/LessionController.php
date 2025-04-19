@@ -5,14 +5,19 @@
         public function __construct() {
             parent::__construct();
             $this->model = $this->load->model('LessionModel');
+            Session::init();
+            if (!Session::get('login')) {
+                header("Location:" . Base_URL . "index/login");
+                exit();
+            }
         }
 
         public function index() {
+            $data = $this->getHeaderData();
             $data['lessions'] = $this->model->getAllLessons('tbl_lession');
-            $homemodel = $this->load->model('HomeModel');
-            $data['classes'] = $homemodel->listClass('tbl_object');
-            $data['list'] = $homemodel->listClass('tbl_object');
-            $this->load->view('header',$data);
+            $data['classes'] = $this->homeModel->listClass('tbl_object');
+            
+            $this->load->view('header', $data);
             $this->load->view('lession/Dashboard', $data);
             $this->load->view('footer');
         }
@@ -59,16 +64,23 @@
                 } else {
                     echo "Thêm bài giảng thất bại";
                 }
+            } else {
+                // Hiển thị form thêm bài giảng
+                $data = $this->getHeaderData();
+                $data['classes'] = $this->homeModel->listClass('tbl_object');
+                
+                $this->load->view('header', $data);
+                $this->load->view('lession/addLession', $data);
+                $this->load->view('footer');
             }
         }
 
-       
-
         public function edit($id) {
+            $data = $this->getHeaderData();
             $data['lession'] = $this->model->getLessonById('tbl_lession', $id);
-            $homemodel = $this->load->model('HomeModel');
-            $data['classes'] = $homemodel->listClass('tbl_object');
-            $this->load->view('header');
+            $data['classes'] = $this->homeModel->listClass('tbl_object');
+            
+            $this->load->view('header', $data);
             $this->load->view('lession/editLession', $data);
             $this->load->view('footer');
         }

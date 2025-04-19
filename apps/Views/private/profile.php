@@ -3,7 +3,13 @@
 <div class="profile-container">
     <div class="admin-info-header">
         <div class="admin-avatar">
-            <img src="<?php echo Base_URL ?>public/images/avatar.jpg" alt="Admin Avatar">
+            <img src="<?php echo Base_URL ?>public/images/avatars/<?php echo isset($data['admin']->avatar) ? $data['admin']->avatar : 'avatar.jpg'; ?>" alt="Admin Avatar">
+            <form action="<?php echo Base_URL; ?>PrivateController/updateAvatar" method="POST" enctype="multipart/form-data" class="avatar-form">
+                <input type="file" name="avatar" id="avatar" accept="image/*" style="display: none;">
+                <label for="avatar" class="change-avatar-btn">
+                    <i class="fas fa-camera"></i>
+                </label>
+            </form>
         </div>
         <div class="admin-details">
             <h2><?php echo $data['admin']->Admin_name; ?></h2>
@@ -127,6 +133,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const profileHeader = document.querySelector('.profile-header');
     const profileAvatar = document.querySelector('.profile-avatar');
+    const avatarInput = document.getElementById('avatar');
+    const avatarForm = document.querySelector('.avatar-form');
+
+    // Xử lý thay đổi avatar
+    avatarInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            avatarForm.submit();
+        }
+    });
 
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -165,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .admin-avatar {
     margin-right: 30px;
+    position: relative;
 }
 
 .admin-avatar img {
@@ -172,6 +188,32 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.change-avatar-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #4a90e2;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.change-avatar-btn:hover {
+    background: #357abd;
+}
+
+.avatar-form {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .admin-details h2 {

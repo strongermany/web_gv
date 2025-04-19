@@ -19,12 +19,7 @@ class HomeController extends DController
     public function homePage()
     {
         $homemodel = $this->load->model('HomeModel');
-        $data['list'] = $homemodel->listClass('tbl_object');
-        
-        // Add error handling
-        if ($data['list'] === false) {
-            $data['list'] = array(); // Set empty array if query fails
-        }
+        $data = $this->getHeaderData();
         
         $this->load->view('header', $data);
         $this->load->view('homePage');

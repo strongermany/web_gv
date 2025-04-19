@@ -76,4 +76,19 @@ class PrivateModel extends DModel {
         $params = array(':adminId' => $adminId);
         return $this->db->update($sql, $params, $adminId);
     }
+
+    public function updateAvatar($adminId, $avatarPath) {
+        $data = array(
+            'avatar' => $avatarPath,
+            'Admin_Id' => $adminId
+        );
+        $cond = "Admin_Id = :Admin_Id";
+        return $this->db->update('tbl_admin', $data, $cond);
+    }
+
+    public function getAdminInfoForHeader($adminId) {
+        $sql = "SELECT Admin_Id, Admin_name, avatar FROM tbl_admin WHERE Admin_Id = ?";
+        $result = $this->db->select($sql, [$adminId]);
+        return !empty($result) ? $result[0] : null;
+    }
 } 

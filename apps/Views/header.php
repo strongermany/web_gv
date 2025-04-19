@@ -45,7 +45,7 @@
                     </li>
                     <li><a href="">Lịch Dạy </a></li>
                     <li class="admin-profile">
-                        <img src="<?php echo Base_URL ?>public/images/avatar.jpg" alt="Admin Avatar" onclick="toggleDropdown(event)">
+                        <img src="<?php echo Base_URL ?>public/images/avatars/<?php echo isset($data['admin']->avatar) ? $data['admin']->avatar : 'avatar.jpg'; ?>" alt="Admin Avatar" onclick="toggleDropdown(event)">
                         <div class="profile-dropdown">
                             <a href="<?php echo Base_URL ?>PrivateController"><i class="fa-solid fa-key"></i>Thông tin cá nhân</a>
                             <a href="<?php echo Base_URL ?>index/logout"><i class="fa-solid fa-right-from-bracket"></i> đăng xuất</a>
