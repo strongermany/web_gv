@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/styles.css" />
+    <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/profile.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,12 +29,25 @@
                 <ul>
                     <li><a href="<?php echo Base_URL ?>HomeController">TRANG CHỦ</a></li>
                     <li><a href="<?php echo Base_URL ?>LessionController">THÔNG BÁO</a></li>
-                    <li><a href="">ĐIỂM DANH</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">ĐIỂM DANH</a>
+                        <div class="dropdown-menu">
+                            <?php if (!empty($list)): ?>
+                                <?php foreach($list as $class): ?>
+                                    <a href="<?php echo Base_URL ?>ListClassController/listClass/<?php echo $class['Object_Id'] ?>/<?php echo $class['Group_Id'] ?>">
+                                        <?php echo htmlspecialchars($class['Name_class']); ?> - Nhóm <?php echo $class['Group_Id']; ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <span class="no-classes">Không có lớp nào</span>
+                            <?php endif; ?>
+                        </div>
+                    </li>
                     <li><a href="">Lịch Dạy </a></li>
                     <li class="admin-profile">
                         <img src="<?php echo Base_URL ?>public/images/avatar.jpg" alt="Admin Avatar" onclick="toggleDropdown(event)">
                         <div class="profile-dropdown">
-                            <a href="#"><i class="fa-solid fa-key"></i></a>
+                            <a href="<?php echo Base_URL ?>PrivateController"><i class="fa-solid fa-key"></i>Thông tin cá nhân</a>
                             <a href="<?php echo Base_URL ?>index/logout"><i class="fa-solid fa-right-from-bracket"></i> đăng xuất</a>
                         </div>
                     </li>
@@ -55,5 +69,6 @@
 
     <!-- Add scripts.js at the end of body -->
     <script src="<?php echo Base_URL ?>public/js/scripts.js"></script>
+    <script src="<?php echo Base_URL ?>public/js/profile.js"></script>
 </body>
 </html>

@@ -7,9 +7,19 @@
         // Do not know how many arguments
         public function select($sql, $data = array(), $fetchStyle = PDO::FETCH_ASSOC){
             $statement = $this->prepare($sql);
-            foreach($data as $key => $value){
-                $statement->bindValue($key + 1, $value);
+            
+            if(!empty($data)){
+                foreach($data as $key => $value){
+                    // Check if the key is a string (named parameter)
+                    if(is_string($key)){
+                        $statement->bindValue($key, $value);
+                    } else {
+                        // For numeric keys (positional parameters)
+                        $statement->bindValue($key + 1, $value);
+                    }
+                }
             }
+            
             $statement->execute();
             return $statement->fetchAll($fetchStyle); 
         }

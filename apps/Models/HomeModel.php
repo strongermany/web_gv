@@ -6,8 +6,17 @@
         }
         
         public function listClass($table){
-            $sql = "SELECT Object_Id, Name_class, Group_Id FROM $table";  
-            return $this->db->select($sql);
+            try {
+                $sql = "SELECT DISTINCT o.Object_Id, o.Name_class, g.Group_Id 
+                        FROM $table o
+                        LEFT JOIN tbl_group g ON o.Object_Id = g.Object_Id
+                        WHERE o.Object_Id IS NOT NULL
+                        ORDER BY o.Name_class, g.Group_Id";
+                return $this->db->select($sql);
+            } catch (Exception $e) {
+                // Log error if needed
+                return false;
+            }
         }
         public function stdBycalss($id_object, $id_group){
             $sql = "SELECT distinct s.* 

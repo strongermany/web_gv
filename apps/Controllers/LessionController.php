@@ -11,7 +11,10 @@
             $data['lessions'] = $this->model->getAllLessons('tbl_lession');
             $homemodel = $this->load->model('HomeModel');
             $data['classes'] = $homemodel->listClass('tbl_object');
+            $data['list'] = $homemodel->listClass('tbl_object');
+            $this->load->view('header',$data);
             $this->load->view('lession/Dashboard', $data);
+            $this->load->view('footer');
         }
 
         public function add() {

@@ -1,7 +1,7 @@
 <!-- Include CSS -->
 <link rel="stylesheet" href="<?php echo Base_URL ?>public/css/notify.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="<?php echo Base_URL ?>apps/Views/lession/style.css">
+<link rel="stylesheet" href="<?php echo Base_URL ?>apps/Views/lession/edit.css">
 
 <div class="container">
     <!-- Search and Filter Section -->
@@ -129,4 +129,4 @@
 </div>
 
 <!-- Include JavaScript -->
-<script src="<?php echo Base_URL ?>apps/Views/lession/script.js"></script>
+<script src="<?php echo Base_URL ?>apps/Views/lession/edit.js"></script>
