@@ -3,7 +3,7 @@
         <!-- Cột 1: Thông tin trường -->
         <div class="footer-column">
             <div class="logo-container">
-                <img src="public/images/logo.png" class="footer-logo">
+                <img src="<?php echo Base_URL ?>public/images/logo.png" class="footer-logo">
                 <h3>TDT University</h3>
             </div>
 

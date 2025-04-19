@@ -28,7 +28,7 @@
                 <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
                 <ul>
                     <li><a href="<?php echo Base_URL ?>HomeController">TRANG CHỦ</a></li>
-                    <li><a href="<?php echo Base_URL ?>LessionController">THÔNG BÁO</a></li>
+                    <li><a href="<?php echo Base_URL ?>LessionController">BÀI GIẢNG</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-trigger">ĐIỂM DANH</a>
                         <div class="dropdown-menu">
@@ -48,6 +48,9 @@
                         <img src="<?php echo Base_URL ?>public/images/avatars/<?php echo isset($data['admin']->avatar) ? $data['admin']->avatar : 'avatar.jpg'; ?>" alt="Admin Avatar" onclick="toggleDropdown(event)">
                         <div class="profile-dropdown">
                             <a href="<?php echo Base_URL ?>PrivateController"><i class="fa-solid fa-key"></i>Thông tin cá nhân</a>
+                            <?php if(isset($data['admin']->Last_login)): ?>
+
+                            <?php endif; ?>
                             <a href="<?php echo Base_URL ?>index/logout"><i class="fa-solid fa-right-from-bracket"></i> đăng xuất</a>
                         </div>
                     </li>
