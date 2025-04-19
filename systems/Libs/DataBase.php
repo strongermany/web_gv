@@ -44,11 +44,22 @@
 
             $sql="Update $table set $updateKeys Where $cond";
             $statement = $this->prepare($sql);
+            
+            // Bind values for SET clause
             foreach($data as $key => $value){
                 $statement->bindValue(":$key",$value);
             }
+            
+            // Bind values for WHERE clause if they exist in $data
+            if (preg_match_all('/:(\w+)/', $cond, $matches)) {
+                foreach ($matches[1] as $param) {
+                    if (isset($data[$param])) {
+                        $statement->bindValue(":$param", $data[$param]);
+                    }
+                }
+            }
+            
             return $statement->execute();
-
         }
         public function delete($table,$cond,$limit = 1){
             $sql = "Delete from $table Where $cond Limit $limit";

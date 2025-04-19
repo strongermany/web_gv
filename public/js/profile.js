@@ -4,20 +4,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const avatarInput = document.getElementById('avatarInput');
     const avatarPreview = document.getElementById('avatarPreview');
     const changeAvatarBtn = document.getElementById('changeAvatarBtn');
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const profileHeader = document.querySelector('.profile-header');
+    const profileAvatar = document.querySelector('.profile-avatar');
 
     // Tab Switching
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.getAttribute('data-tab');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons and panes
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
             
-            // Update active states
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            
-            btn.classList.add('active');
-            document.getElementById(target).classList.add('active');
+            // Add active class to clicked button and corresponding pane
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+
+            // Show/hide profile header and avatar based on active tab
+            if (tabId === 'classes') {
+                profileHeader.style.display = 'none';
+                profileAvatar.style.display = 'none';
+            } else {
+                profileHeader.style.display = 'flex';
+                profileAvatar.style.display = 'block';
+            }
         });
     });
 

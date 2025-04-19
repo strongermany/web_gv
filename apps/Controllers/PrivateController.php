@@ -52,7 +52,7 @@ class PrivateController extends DController {
         ];
 
         // Debug output
-        error_log("Profile Data: " . print_r($data, true));
+        //error_log("Profile Data: " . print_r($data, true));
 
         $this->load->view('header', $data);
         $this->load->view('private/profile', $data);

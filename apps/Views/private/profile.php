@@ -1,23 +1,20 @@
 <?php require_once 'apps/Views/header.php'; ?>
 
 <div class="profile-container">
-    <div class="profile-header">
-        <div class="profile-avatar">
+    <div class="admin-info-header">
+        <div class="admin-avatar">
             <img src="<?php echo Base_URL ?>public/images/avatar.jpg" alt="Admin Avatar">
-            <button class="change-avatar-btn">
-                <i class="fas fa-camera"></i>
-            </button>
         </div>
-        <div class="profile-info">
-            <h1><?php echo $data['admin']->Admin_name; ?></h1>
-            <p class="role"><?php echo $data['admin']->Role; ?></p>
-            <div class="contact-info">
+        <div class="admin-details">
+            <h2><?php echo $data['admin']->Admin_name; ?></h2>
+            <p class="admin-role"><?php echo strtolower($data['admin']->Role); ?></p>
+            <div class="admin-contact">
                 <span><i class="fas fa-id-badge"></i> <?php echo $data['admin']->Admin_Id; ?></span>
                 <span><i class="fas fa-envelope"></i> <?php echo $data['admin']->Email; ?></span>
                 <span><i class="fas fa-phone"></i> <?php echo $data['admin']->Phone; ?></span>
             </div>
-            <div class="status-info">
-                <span class="status-badge <?php echo $data['admin']->Status ? 'active' : 'inactive'; ?>">
+            <div class="admin-status">
+                <span class="status-tag <?php echo $data['admin']->Status ? 'active' : 'inactive'; ?>">
                     <?php echo $data['admin']->Status ? 'Đang hoạt động' : 'Không hoạt động'; ?>
                 </span>
                 <span class="last-login">
@@ -87,14 +84,15 @@
             </div>
 
             <div class="tab-pane" id="classes">
-                <div class="classes-list">
+                <div class="classes-list">  
                     <?php foreach ($data['classes'] as $class): ?>
                         <div class="class-card">
-                            <h3><?php echo $class->Name_class; ?></h3>
-                            <p>Nhóm: <?php echo $class->Group_Id; ?></p>
-                            <p>Mã lớp: <?php echo $class->Class_Id; ?></p>
+                            <h3><?php echo $class['Name_class']; ?></h3>
+                            <p>Nhóm: <?php echo $class['Group_Id']; ?></p>
+                            <p>Mã lớp: <?php echo $class['Class_Id']; ?></p>
+                            <p>Tổng số học sinh: <?php echo $class['total_students']; ?></p>
                             <div class="class-actions">
-                                <a href="<?php echo Base_URL; ?>ListClassController/listClass/<?php echo $class->Object_Id; ?>/<?php echo $class->Group_Id; ?>" class="btn btn-primary">Xem chi tiết</a>
+                                <a href="<?php echo Base_URL; ?>ListClassController/listClass/<?php echo $class['Object_Id']; ?>/<?php echo $class['Group_Id']; ?>" class="btn btn-primary">Xem chi tiết</a>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -122,5 +120,124 @@
     </div>
 </div>
 
-<?php require_once 'apps/Views/footer.php'; ?>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const profileHeader = document.querySelector('.profile-header');
+    const profileAvatar = document.querySelector('.profile-avatar');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons and panes
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding pane
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+
+            // Show/hide profile header and avatar based on active tab
+            if (tabId === 'classes') {
+                profileHeader.style.display = 'none';
+                profileAvatar.style.display = 'none';
+            } else {
+                profileHeader.style.display = 'flex';
+                profileAvatar.style.display = 'block';
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.admin-info-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admin-avatar {
+    margin-right: 30px;
+}
+
+.admin-avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-details h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.admin-role {
+    color: #666;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.admin-contact {
+    display: flex;
+    gap: 20px;
+    margin: 10px 0;
+}
+
+.admin-contact span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.admin-contact i {
+    color: #4a90e2;
+}
+
+.admin-status {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.status-tag {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.status-tag.active {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-tag.inactive {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.last-login {
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.last-login i {
+    color: #4a90e2;
+}
+</style>
+
+
 

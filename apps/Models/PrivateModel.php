@@ -10,8 +10,9 @@ class PrivateModel extends DModel {
     }
 
     public function getTeachingClasses($adminId) {
-        // Get all groups and their class names
-        $sql = "SELECT g.*, o.Name_class 
+        // Get all groups and their class names with student count
+        $sql = "SELECT g.*, o.Name_class, o.Object_Id as Class_Id,
+                (SELECT COUNT(*) FROM tbl_student s WHERE s.Group_Id = g.Group_Id) as total_students
                 FROM tbl_group g 
                 JOIN tbl_object o ON g.Object_Id = o.Object_Id";
         return $this->db->select($sql);
@@ -20,10 +21,10 @@ class PrivateModel extends DModel {
     public function getAttendanceStats($adminId) {
         // Get overall attendance stats
         $sql = "SELECT 
-                    COUNT(*) as total_classes,
-                    SUM(CASE WHEN Status = 1 THEN 1 ELSE 0 END) as attended_classes,
-                    SUM(CASE WHEN Status = 0 THEN 1 ELSE 0 END) as absent_classes
-                FROM tbl_attendance";
+                (SELECT COUNT(*) FROM tbl_group) as total_classes,
+                SUM(CASE WHEN Status = 1 THEN 1 ELSE 0 END) as attended_classes,
+                SUM(CASE WHEN Status = 0 THEN 1 ELSE 0 END) as absent_classes
+            FROM tbl_attendance";
         return $this->db->select($sql);
     }
 
@@ -36,16 +37,15 @@ class PrivateModel extends DModel {
                     Status = :status
                 WHERE Admin_Id = :adminId";
         
-        $params = array(
-            ':admin_name' => $data['admin_name'],
-            ':email' => $data['email'],
-            ':phone' => $data['phone'],
-            ':role' => $data['role'],
-            ':status' => $data['status'],
-            ':adminId' => $adminId
-        );
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':admin_name', $data['admin_name']);
+        $stmt->bindValue(':email', $data['email']);
+        $stmt->bindValue(':phone', $data['phone']);
+        $stmt->bindValue(':role', $data['role']);
+        $stmt->bindValue(':status', $data['status']);
+        $stmt->bindValue(':adminId', $adminId);
         
-        return $this->db->update($sql, $params, $adminId);
+        return $stmt->execute();
     }
 
     public function changePassword($adminId, $data) {
@@ -54,7 +54,7 @@ class PrivateModel extends DModel {
         $params = array(':adminId' => $adminId);
         $result = $this->db->select($sql, $params);
         
-        if (!password_verify($data['current_password'], $result[0]['password'])) {
+        if ($data['current_password'] !== $result[0]['password']) {
             return false;
         }
 
@@ -63,12 +63,12 @@ class PrivateModel extends DModel {
                 SET password = :password,
                     Last_login = CURRENT_TIMESTAMP
                 WHERE Admin_Id = :adminId";
-        $params = array(
-            ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
-            ':adminId' => $adminId
-        );
         
-        return $this->db->update($sql, $params, $adminId);
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':password', $data['new_password']);
+        $stmt->bindValue(':adminId', $adminId);
+        
+        return $stmt->execute();
     }
 
     public function updateLastLogin($adminId) {
