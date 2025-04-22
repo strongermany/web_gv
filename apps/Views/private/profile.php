@@ -54,6 +54,7 @@
             <button class="tab-btn active" data-tab="info">Thông tin cá nhân</button>
             <button class="tab-btn" data-tab="classes">Lớp đang dạy</button>
             <button class="tab-btn" data-tab="password">Đổi mật khẩu</button>
+            <button class="tab-btn" data-tab="slider">Quản lý slider</button>
         </div>
 
         <div class="tab-content">
@@ -122,6 +123,118 @@
                     <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                 </form>
             </div>
+
+            <div class="tab-pane" id="slider">
+                <div class="slider-management">
+                    <h3>Quản lý slider</h3>
+                    <form action="<?php echo Base_URL; ?>PrivateController/addSliderItem" method="POST" enctype="multipart/form-data" class="slider-form">
+                        <div class="form-group">
+                            <label for="slider_category">Danh mục</label>
+                            <select id="slider_category" name="category_id" required>
+                                <option value="">Chọn danh mục</option>
+                                <?php if (isset($data['categories']) && !empty($data['categories'])): ?>
+                                    <?php foreach ($data['categories'] as $category): ?>
+                                        <option value="<?php echo $category['category_id']; ?>">
+                                            <?php echo $category['category_name']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="slider_title">Tiêu đề</label>
+                            <input type="text" id="slider_title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="slider_content">Nội dung</label>
+                            <textarea id="slider_content" name="content" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="slider_image">Hình ảnh</label>
+                            <input type="file" id="slider_image" name="image" accept="image/*" required>
+                            <small class="form-text text-muted">Kích thước khuyến nghị: 800x600px</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="slider_link">Liên kết (nếu có)</label>
+                            <input type="url" id="slider_link" name="link_url">
+                        </div>
+                        <div class="form-group">
+                            <label for="slider_status">Trạng thái</label>
+                            <select id="slider_status" name="status">
+                                <option value="1">Hiển thị</option>
+                                <option value="0">Ẩn</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Thêm slider</button>
+                    </form>
+
+                    <div class="slider-list">
+                        <h4>Danh sách slider</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Hình ảnh</th>
+                                        <th>Danh mục</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Nội dung</th>
+                                        <th>Liên kết</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (isset($data['sliderItems']) && !empty($data['sliderItems'])): ?>
+                                        <?php foreach ($data['sliderItems'] as $item): ?>
+                                            <tr>
+                                                <td>
+                                                    <img src="<?php echo Base_URL; ?>public/images/slider/<?php echo $item['image_url']; ?>" 
+                                                         alt="<?php echo $item['title']; ?>" 
+                                                         style="width: 100px; height: auto;">
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                    $category = array_filter($data['categories'], function($cat) use ($item) {
+                                                        return $cat['category_id'] == $item['category_id'];
+                                                    });
+                                                    echo !empty($category) ? reset($category)['category_name'] : 'N/A';
+                                                    ?>
+                                                </td>
+                                                <td><?php echo $item['title']; ?></td>
+                                                <td><?php echo $item['content']; ?></td>
+                                                <td>
+                                                    <?php if ($item['link_url']): ?>
+                                                        <a href="<?php echo $item['link_url']; ?>">Xem</a>
+                                                    <?php else: ?>
+                                                        -
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <select class="status-select" onchange="updateStatus(this, <?php echo $item['item_id']; ?>)">
+                                                        <option value="1" <?php echo $item['status'] ? 'selected' : ''; ?>>Hiển thị</option>
+                                                        <option value="0" <?php echo !$item['status'] ? 'selected' : ''; ?>>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <a href="<?php echo Base_URL; ?>PrivateController/updateSliderItem/<?php echo $item['item_id']; ?>" 
+                                                       class="btn btn-sm btn-primary">Sửa</a>
+                                                    <a href="<?php echo Base_URL; ?>PrivateController/deleteSliderItem/<?php echo $item['item_id']; ?>" 
+                                                       class="btn btn-sm btn-danger" 
+                                                       onclick="return confirm('Bạn có chắc chắn muốn xóa slider này?')">Xóa</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="7" class="text-center">Chưa có slider nào</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -165,6 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function updateStatus(select, itemId) {
+    window.location.href = '<?php echo Base_URL; ?>PrivateController/toggleSliderStatus/' + itemId;
+}
 </script>
 
 <style>
@@ -278,6 +395,108 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .last-login i {
     color: #4a90e2;
+}
+
+.slider-management {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.slider-management h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.slider-form {
+    margin-bottom: 30px;
+}
+
+.slider-form .form-group {
+    margin-bottom: 15px;
+}
+
+.slider-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.slider-form input[type="text"],
+.slider-form input[type="url"],
+.slider-form textarea,
+.slider-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.slider-form textarea {
+    resize: vertical;
+}
+
+.slider-list {
+    margin-top: 30px;
+}
+
+.slider-list h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.status-select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+}
+
+.status-select option[value="1"] {
+    color: #28a745;
+}
+
+.status-select option[value="0"] {
+    color: #dc3545;
 }
 </style>
 

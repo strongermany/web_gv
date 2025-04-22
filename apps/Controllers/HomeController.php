@@ -19,9 +19,13 @@ class HomeController extends DController
     public function homePage()
     {
         $homemodel = $this->load->model('HomeModel');
+        $privateModel = $this->load->model('PrivateModel');
+        
         $data = $this->getHeaderData();
+        $data['sliderItems'] = $privateModel->getAllSliderItems();
         
         $this->load->view('header', $data);
+        $this->load->view('slider', $data);
         $this->load->view('homePage');
         $this->load->view('footer');
     }

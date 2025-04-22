@@ -44,15 +44,18 @@ class PrivateController extends DController {
         $homemodel = $this->load->model('HomeModel');
         $classList = $homemodel->listClass('tbl_object');
 
+        // Get slider data
+        $categories = $this->privateModel->getAllCategories();
+        $sliderItems = $this->privateModel->getAllSliderItems();
+
         $data = [
             'admin' => (object)$adminInfo[0], // Convert array to object
             'classes' => $teachingClasses,
             'stats' => (object)($attendanceStats[0] ?? ['total_classes' => 0, 'attended_classes' => 0, 'absent_classes' => 0]),
-            'list' => $classList // Add class list for header menu
+            'list' => $classList, // Add class list for header menu
+            'categories' => $categories,
+            'sliderItems' => $sliderItems
         ];
-
-        // Debug output
-        //error_log("Profile Data: " . print_r($data, true));
 
         $this->load->view('header', $data);
         $this->load->view('private/profile', $data);
@@ -165,5 +168,114 @@ class PrivateController extends DController {
             }
             exit;
         }
+    }
+
+    public function addSliderItem() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $adminId = Session::get('Admin_Id');
+            if (!$adminId) {
+                header('Location: ' . Base_URL . 'index/login');
+                exit;
+            }
+
+            // Handle file upload
+            $target_dir = "public/images/slider/";
+            if (!file_exists($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+
+            $file = $_FILES['image'];
+            $file_name = time() . '_' . basename($file['name']);
+            $target_file = $target_dir . $file_name;
+
+            if (move_uploaded_file($file['tmp_name'], $target_file)) {
+                $data = [
+                    'category_id' => $_POST['category_id'],
+                    'title' => $_POST['title'],
+                    'content' => $_POST['content'],
+                    'image_url' => $file_name,
+                    'link_url' => $_POST['link_url']
+                ];
+
+                if ($this->privateModel->addSliderItem($data)) {
+                    header('Location: ' . Base_URL . 'PrivateController?success=' . urlencode('Thêm slider thành công'));
+                } else {
+                    header('Location: ' . Base_URL . 'PrivateController?error=' . urlencode('Có lỗi xảy ra khi thêm slider'));
+                }
+            } else {
+                header('Location: ' . Base_URL . 'PrivateController?error=' . urlencode('Có lỗi xảy ra khi upload ảnh'));
+            }
+            exit;
+        }
+    }
+
+    public function updateSliderItem() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $adminId = Session::get('Admin_Id');
+            if (!$adminId) {
+                header('Location: ' . Base_URL . 'index/login');
+                exit;
+            }
+
+            $data = [
+                'item_id' => $_POST['item_id'],
+                'category_id' => $_POST['category_id'],
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+                'link_url' => $_POST['link_url']
+            ];
+
+            // Handle file upload if new image is provided
+            if (!empty($_FILES['image']['name'])) {
+                $target_dir = "public/images/slider/";
+                $file = $_FILES['image'];
+                $file_name = time() . '_' . basename($file['name']);
+                $target_file = $target_dir . $file_name;
+
+                if (move_uploaded_file($file['tmp_name'], $target_file)) {
+                    $data['image_url'] = $file_name;
+                } else {
+                    header('Location: ' . Base_URL . 'PrivateController?error=' . urlencode('Có lỗi xảy ra khi upload ảnh'));
+                    exit;
+                }
+            }
+
+            if ($this->privateModel->updateSliderItem($data)) {
+                header('Location: ' . Base_URL . 'PrivateController?success=' . urlencode('Cập nhật slider thành công'));
+            } else {
+                header('Location: ' . Base_URL . 'PrivateController?error=' . urlencode('Có lỗi xảy ra khi cập nhật slider'));
+            }
+            exit;
+        }
+    }
+
+    public function deleteSliderItem($id) {
+        $adminId = Session::get('Admin_Id');
+        if (!$adminId) {
+            header('Location: ' . Base_URL . 'index/login');
+            exit;
+        }
+
+        if ($this->privateModel->deleteSliderItem($id)) {
+            header('Location: ' . Base_URL . 'PrivateController?success=' . urlencode('Xóa slider thành công'));
+        } else {
+            header('Location: ' . Base_URL . 'PrivateController?error=' . urlencode('Có lỗi xảy ra khi xóa slider'));
+        }
+        exit;
+    }
+
+    public function toggleSliderStatus($id) {
+        $slider = $this->privateModel->getSliderItemById($id);
+        
+        if ($slider) {
+            $newStatus = $slider[0]['status'] ? 0 : 1;
+            $data = [
+                'item_id' => $id,
+                'status' => $newStatus
+            ];
+            $this->privateModel->updateSliderItem($data);
+        }
+        
+        header('Location: ' . Base_URL . 'PrivateController/index');
     }
 } 

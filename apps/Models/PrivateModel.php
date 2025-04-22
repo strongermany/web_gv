@@ -91,4 +91,89 @@ class PrivateModel extends DModel {
         $result = $this->db->select($sql, [$adminId]);
         return !empty($result) ? $result[0] : null;
     }
+
+    public function getAllCategories() {
+        $sql = "SELECT * FROM categories WHERE status = 1 ORDER BY sort_order, category_name";
+        return $this->db->select($sql);
+    }
+
+    public function getCategoryById($id) {
+        $table = "categories";
+        $cond = "category_id=:id";
+        $data = [':id' => $id];
+        return $this->db->select($table, $cond, $data);
+    }
+
+    public function addCategory($data) {
+        $table = "categories";
+        $data = [
+            'category_name' => $data['category_name'],
+            'category_code' => $data['category_code']
+        ];
+        return $this->db->insert($table, $data);
+    }
+
+    public function updateCategory($data) {
+        $table = "categories";
+        $cond = "category_id=:id";
+        $data = [
+            'category_name' => $data['category_name'],
+            'category_code' => $data['category_code'],
+            'id' => $data['category_id']
+        ];
+        return $this->db->update($table, $data, $cond);
+    }
+
+    public function deleteCategory($id) {
+        $table = "categories";
+        $cond = "category_id=:id";
+        $data = [':id' => $id];
+        return $this->db->delete($table, $cond, $data);
+    }
+
+    // Slider Management Methods
+    public function getAllSliderItems() {
+        $sql = "SELECT si.*, c.category_name, c.category_code
+                FROM slider_items si 
+                LEFT JOIN categories c ON si.category_id = c.category_id 
+                WHERE si.status = 1 
+                ORDER BY si.created_at DESC";
+        return $this->db->select($sql);
+    }
+
+    public function getSliderItemById($id) {
+        $sql = "SELECT * FROM slider_items WHERE item_id = :id";
+        $data = ['id' => $id];
+        return $this->db->select($sql, $data);
+    }
+
+    public function addSliderItem($data) {
+        $table = "slider_items";
+        $data = [
+            'category_id' => $data['category_id'],
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'image_url' => $data['image_url'],
+            'link_url' => $data['link_url'],
+            'status' => $data['status'] ?? 1
+        ];
+        return $this->db->insert($table, $data);
+    }
+
+    public function updateSliderItem($data) {
+        $table = "slider_items";
+        $cond = "item_id = :item_id";
+        $params = [
+            'status' => $data['status'],
+            'item_id' => $data['item_id']
+        ];
+        return $this->db->update($table, $params, $cond);
+    }
+
+    public function deleteSliderItem($id) {
+        $table = "slider_items";
+        $cond = "item_id = :id";
+        $data = ['id' => $id];
+        return $this->db->delete($table, $cond, $data);
+    }
 } 

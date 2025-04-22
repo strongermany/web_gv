@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS 3D Coverflow Image Slider</title>
-    <meta name="author" content="Codeconvey" />
     <link rel="stylesheet" href="public/css/slider1.css" />
-    <link rel="stylesheet" type="text/css" href="public/css/slider2.css" />
-</head>
+    <!-- <link rel="stylesheet" type="text/css" href="public/css/slider2.css" /> -->
+
 
 <body>
     <header class="ScriptHeader">
@@ -29,95 +20,70 @@
                 <div class="Scriptcontent">
                     <div class="container">
                         <div class="wgh-slider">
-                            <input class="wgh-slider-target" type="radio" id="slide-1" name="slider" />
-                            <input class="wgh-slider-target" type="radio" id="slide-2" name="slider" />
-                            <input class="wgh-slider-target" type="radio" id="slide-3" name="slider"
-                                checked="checked" />
-                            <input class="wgh-slider-target" type="radio" id="slide-4" name="slider" />
-                            <input class="wgh-slider-target" type="radio" id="slide-5" name="slider" />
-                            <div class="wgh-slider__viewport">
-                                <div class="wgh-slider__viewbox">
-                                    <div class="wgh-slider__container">
-                                        <div class="wgh-slider-item">
-                                            <div class="wgh-slider-item__inner">
-                                                <figure class="wgh-slider-item-figure">
-                                                    <img class="wgh-slider-item-figure__image" src="img/image-1.jpg"
-                                                        alt="The 5th Exotic" />
-                                                    <figcaption class="wgh-slider-item-figure__caption">
-                                                        <a href="https://f4.bcbits.com/img/a3905613628_16.jpg">Cử nhân
-                                                            Khoa Học Máy Tính</a><span>ĐH TDT - 2015 </span>
-                                                    </figcaption>
-                                                </figure>
-                                                <label class="wgh-slider-item__trigger" for="slide-1"
-                                                    title="Show product 1"></label>
-                                            </div>
-                                        </div>
-                                        <div class="wgh-slider-item">
-                                            <div class="wgh-slider-item__inner">
-                                                <figure class="wgh-slider-item-figure">
-                                                    <img class="wgh-slider-item-figure__image" src="img/image-2.jpg"
-                                                        alt="The 5th Exotic" />
-                                                    <figcaption class="wgh-slider-item-figure__caption">
-                                                        <a href="https://f4.bcbits.com/img/a3905613628_16.jpg">Thạc sỹ
-                                                            Khoa Học Dữ Liệu</a><span>Mongolia University - 2018</span>
-                                                    </figcaption>
-                                                </figure>
-                                                <label class="wgh-slider-item__trigger" for="slide-2"
-                                                    title="Show product 2"></label>
-                                            </div>
-                                        </div>
-                                        <div class="wgh-slider-item">
-                                            <div class="wgh-slider-item__inner">
-                                                <figure class="wgh-slider-item-figure">
-                                                    <img class="wgh-slider-item-figure__image" src="img/image-3.png"
-                                                        alt="The 5th Exotic" />
-                                                    <figcaption class="wgh-slider-item-figure__caption">
-                                                        <a href="https://f4.bcbits.com/img/a3905613628_16.jpg">Tiến sỹ
-                                                            Khoa Học Dữ Liệu</a><span>Montelipoer University</span>
-                                                    </figcaption>
-                                                </figure>
-                                                <label class="wgh-slider-item__trigger" for="slide-3"
-                                                    title="Show product 3"></label>
-                                            </div>
-                                        </div>
-                                        <div class="wgh-slider-item">
-                                            <div class="wgh-slider-item__inner">
-                                                <figure class="wgh-slider-item-figure">
-                                                    <img class="wgh-slider-item-figure__image" src="img/image-4.jpg"
-                                                        alt="The 5th Exotic" />
-                                                    <figcaption class="wgh-slider-item-figure__caption">
-                                                        <a href="https://f4.bcbits.com/img/a3905613628_16.jpg">Bài báo
-                                                            khoa học</a><span>2015</span>
-                                                    </figcaption>
-                                                </figure>
-                                                <label class="wgh-slider-item__trigger" for="slide-4"
-                                                    title="Show product 4"></label>
-                                            </div>
-                                        </div>
-                                        <div class="wgh-slider-item">
-                                            <div class="wgh-slider-item__inner">
-                                                <figure class="wgh-slider-item-figure">
-                                                    <img class="wgh-slider-item-figure__image" src="img/th.jpg"
-                                                        alt="RYSY - Traveler LP" />
-                                                    <figcaption class="wgh-slider-item-figure__caption">
-                                                        <a href="https://picsum.photos/id/237/480/480">Dự án công
-                                                            nghệ</a><span>2020</span>
-                                                    </figcaption>
-                                                </figure>
-                                                <label class="wgh-slider-item__trigger" for="slide-5"
-                                                    title="Show product 5"></label>
-                                            </div>
+                            <?php if (!empty($sliderItems)): ?>
+                                <?php foreach ($sliderItems as $index => $item): ?>
+                                    <input class="wgh-slider-target" type="radio" id="slide-<?php echo $index + 1; ?>" name="slider" <?php echo $index == 0 ? 'checked="checked"' : ''; ?> />
+                                <?php endforeach; ?>
+                                
+                                <div class="wgh-slider__viewport">
+                                    <div class="wgh-slider__viewbox">
+                                        <div class="wgh-slider__container">
+                                            <?php foreach ($sliderItems as $index => $item): ?>
+                                                <div class="wgh-slider-item">
+                                                    <div class="wgh-slider-item__inner">
+                                                        <figure class="wgh-slider-item-figure">
+                                                            <img class="wgh-slider-item-figure__image" 
+                                                                 src="<?php echo Base_URL; ?>public/images/slider/<?php echo $item['image_url']; ?>" 
+                                                                 alt="<?php echo $item['title']; ?>" />
+                                                            <figcaption class="wgh-slider-item-figure__caption">
+                                                                <a href="<?php echo $item['link_url'] ?: '#'; ?>"><?php echo $item['title']; ?></a>
+                                                                <span><?php echo $item['content']; ?></span>
+                                                            </figcaption>
+                                                        </figure>
+                                                        <label class="wgh-slider-item__trigger" for="slide-<?php echo $index + 1; ?>" title="Show item <?php echo $index + 1; ?>"></label>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php else: ?>
+                                <div class="no-slider">
+                                    <p>Chưa có dữ liệu slider</p>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <!-- partial -->
                 </div>
             </div>
         </div>
     </section>
 </body>
 
-</html>
+<script>
+    let currentSlide = 1;
+    const totalSlides = <?php echo count($sliderItems); ?>;
+
+    function nextSlide() {
+        currentSlide = (currentSlide % totalSlides) + 1;
+        document.getElementById(`slide-${currentSlide}`).checked = true;
+    }
+
+    // Start the automatic slider
+    setInterval(nextSlide, 5000);
+</script>
+
+<style>
+.no-slider {
+    text-align: center;
+    padding: 50px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.no-slider p {
+    color: #666;
+    font-size: 18px;
+}
+</style>
