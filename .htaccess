@@ -1,0 +1,14 @@
+
+RewriteEngine on
+
+# Nếu không phải là thư mục
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Nếu không phải là file
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Chuyển hướng tất cả request về index.php
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# Cho phép Apache truy cập vào file tĩnh
+RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|ico|woff|woff2|ttf|svg)$
