@@ -14,7 +14,7 @@
                     <a href="<?php echo $item['link_url'] ?: '#'; ?>" class="card-link">
                         <img src="<?php echo Base_URL; ?>public/images/slider/<?php echo $item['image_url']; ?>"
                             class="card-image" alt="<?php echo $item['title']; ?>" />
-                        <p class="badge">Developer</p>
+                        <p class="badge">Developer-u</p>
                         <h2 class="card-title"><?php echo $item['title']; ?></h2>
                         <button class="card-button material-symbols-rounded">
                             arrow_forward

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const fileInput = document.getElementById("fileInput");
       if (fileInput.files.length === 0) {
         event.preventDefault();
-        alert("Please select a file to upload.");
+        alert("Please select a file to upload..");
       }
     });
   }
