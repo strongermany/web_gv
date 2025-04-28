@@ -7,7 +7,8 @@ class index extends DController
     }
     public function index()
     {
-        return $this->login();
+        header("Location:".Base_URL."HomeController");
+        exit;
     }
 
     public function login() {

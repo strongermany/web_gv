@@ -173,7 +173,233 @@ class PrivateModel extends DModel {
     public function deleteSliderItem($id) {
         $table = "slider_items";
         $cond = "item_id = :id";
-        $data = ['id' => $id];
+        $data = [':id' => $id];
         return $this->db->delete($table, $cond, $data);
+    }
+
+    // News Management Methods
+    public function getAllNews() {
+        $sql = "SELECT * FROM tbl_news";
+        return $this->db->select($sql);
+    }
+
+    public function getNewsById($id) {
+        $sql = "SELECT * FROM tbl_news WHERE news_id = :id";
+        $data = [':id' => $id];
+        return $this->db->select($sql, $data);
+    }
+
+    public function addNews($data) {
+        $table = "tbl_news";
+        $insertData = [
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'category' => $data['category'],
+            'image_url' => isset($data['image_url']) ? $data['image_url'] : null
+        ];
+        return $this->db->insert($table, $insertData);
+    }
+
+    public function updateNews($id, $data) {
+        $table = "tbl_news";
+        $cond = "news_id = :news_id";
+        $updateData = [
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'category' => $data['category'],
+            'link_url' => $data['link_url'],
+            'news_id' => $id
+        ];
+        if (isset($data['image_url'])) {
+            $updateData['image_url'] = $data['image_url'];
+        }
+        return $this->db->update($table, $updateData, $cond);
+    }
+
+    public function deleteNews($id) {
+        $table = "tbl_news";
+        $cond = "news_id = :id";
+        $data = [':id' => $id];
+        return $this->db->delete($table, $cond, $data);
+    }
+
+    public function toggleNewsStatus($id) {
+        $table = "tbl_news";
+        $cond = "news_id = :id";
+        $data = [
+            'status' => 'NOT status',
+            'id' => $id
+        ];
+        return $this->db->update($table, $data, $cond);
+    }
+
+    public function getAdminStats($adminId) {
+        // Get admin statistics including total classes and attendance
+        $sql = "SELECT 
+                (SELECT COUNT(DISTINCT Group_Id) 
+                 FROM tbl_group) as total_classes,
+                
+                (SELECT COUNT(DISTINCT Student_Id) 
+                 FROM tbl_student) as total_students,
+                
+                (SELECT COUNT(*) 
+                 FROM tbl_attendance 
+                 WHERE Status = 1) as attended_classes,
+                
+                (SELECT COUNT(*) 
+                 FROM tbl_attendance 
+                 WHERE Status = 0) as absent_classes";
+        
+        return $this->db->select($sql);
+    }
+
+    public function getAdminClasses($adminId) {
+        // Get all groups/classes with their details and student count
+        $sql = "SELECT g.*, o.Name_class, o.Object_Id as Class_Id,
+                (SELECT COUNT(*) FROM tbl_student s WHERE s.Group_Id = g.Group_Id) as total_students
+                FROM tbl_group g 
+                JOIN tbl_object o ON g.Object_Id = o.Object_Id
+                WHERE g.Admin_Id = :adminId
+                ORDER BY g.Group_Id";
+        
+        return $this->db->select($sql, [':adminId' => $adminId]);
+    }
+
+    // Course Management Methods
+    public function getAllCourses() {
+        $sql = "SELECT * FROM courses ORDER BY id DESC";
+        $result = $this->db->select($sql, [], PDO::FETCH_ASSOC);
+        return $result ? $result : [];
+    }
+
+    public function getCourseById($id) {
+        try {
+            $sql = "SELECT * FROM courses WHERE id = :id LIMIT 1";
+            $params = [':id' => $id];
+            $result = $this->db->select($sql, $params, PDO::FETCH_ASSOC);
+            
+            // Debug: Kiểm tra kết quả truy vấn
+            error_log("SQL Query: " . $sql);
+            error_log("Params: " . print_r($params, true));
+            error_log("Query Result: " . print_r($result, true));
+            
+            return !empty($result) ? $result[0] : false;
+        } catch (Exception $e) {
+            error_log("Error in getCourseById: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function addCourse($data) {
+        $table = "courses";
+        $insertData = [
+            'title' => $data['title'],
+            'instructor' => $data['instructor'],
+            'description' => $data['description'],
+            'original_price' => $data['original_price'],
+            'discount' => $data['discount'],
+            'discounted_price' => $data['discounted_price'],
+            'image' => isset($data['image']) ? $data['image'] : null,
+            'rating' => isset($data['rating']) ? $data['rating'] : 0,
+            'rating_count' => isset($data['rating_count']) ? $data['rating_count'] : 0
+        ];
+        return $this->db->insert($table, $insertData);
+    }
+
+    public function updateCourse($id, $data) {
+        try {
+            $cond = "id = :id";
+            $data['id'] = $id;
+            return $this->db->update('courses', $data, $cond);
+        } catch (Exception $e) {
+            error_log("Error updating course: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function deleteCourse($id) {
+        try {
+            $cond = "id = :id";
+            return $this->db->delete('courses', $cond, ['id' => $id]);
+        } catch (Exception $e) {
+            error_log("Error deleting course: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Cập nhật trạng thái khóa học
+    public function updateCourseStatus($id, $status) {
+        $table = "courses";
+        $updateData = [
+            'status' => $status,
+            'id' => $id
+        ];
+        $cond = "id = :id";
+        return $this->db->update($table, $updateData, $cond);
+    }
+
+    // Tìm kiếm khóa học
+    public function searchCourses($keyword) {
+        $sql = "SELECT * FROM courses 
+                WHERE title LIKE :keyword 
+                OR instructor LIKE :keyword 
+                OR description LIKE :keyword
+                ORDER BY id DESC";
+        $params = [':keyword' => '%' . $keyword . '%'];
+        return $this->db->select($sql, $params, PDO::FETCH_ASSOC);
+    }
+
+    // Lấy khóa học theo trạng thái
+    public function getCoursesByStatus($status) {
+        $sql = "SELECT * FROM courses WHERE status = :status ORDER BY created_at DESC";
+        return $this->db->select($sql, [':status' => $status], PDO::FETCH_ASSOC);
+    }
+
+    // Cập nhật đánh giá khóa học
+    public function updateCourseRating($id, $rating) {
+        $course = $this->getCourseById($id);
+        if (!$course) {
+            return false;
+        }
+
+        $currentRating = floatval($course['rating']);
+        $currentCount = intval($course['rating_count']);
+        
+        // Tính toán rating mới
+        $newCount = $currentCount + 1;
+        $newRating = (($currentRating * $currentCount) + $rating) / $newCount;
+        
+        $table = "courses";
+        $updateData = [
+            'rating' => number_format($newRating, 2),
+            'rating_count' => $newCount,
+            'id' => $id
+        ];
+        $cond = "id = :id";
+        
+        return $this->db->update($table, $updateData, $cond);
+    }
+
+    // Lấy khóa học nổi bật (rating cao)
+    public function getFeaturedCourses($limit = 6) {
+        $sql = "SELECT * FROM courses 
+                ORDER BY rating DESC, rating_count DESC 
+                LIMIT :limit";
+        return $this->db->select($sql, [':limit' => $limit], PDO::FETCH_ASSOC);
+    }
+
+    // Lấy khóa học mới nhất
+    public function getLatestCourses($limit = 6) {
+        $sql = "SELECT * FROM courses 
+                ORDER BY id DESC 
+                LIMIT :limit";
+        return $this->db->select($sql, [':limit' => $limit], PDO::FETCH_ASSOC);
+    }
+
+    // Đếm tổng số khóa học
+    public function countCourses() {
+        $sql = "SELECT COUNT(*) as total FROM courses";
+        $result = $this->db->select($sql, [], PDO::FETCH_ASSOC);
+        return $result[0]['total'];
     }
 } 

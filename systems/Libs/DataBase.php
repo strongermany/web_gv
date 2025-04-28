@@ -61,11 +61,18 @@
             
             return $statement->execute();
         }
-        public function delete($table,$cond,$limit = 1){
-            $sql = "Delete from $table Where $cond Limit $limit";
+        public function delete($table, $cond, $data = array(), $limit = null) {
+            $sql = "DELETE FROM $table WHERE $cond";
+            if ($limit !== null) {
+                $sql .= " LIMIT $limit";
+            }
             $statement = $this->prepare($sql);
+            if (!empty($data)) {
+                foreach ($data as $key => $value) {
+                    $statement->bindValue($key, $value);
+                }
+            }
             return $statement->execute();
-
         }
         public function affectedRows($sql,$username,$password){// check fit with data basse or not;
             $statement = $this->prepare($sql);

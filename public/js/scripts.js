@@ -99,6 +99,14 @@ function redirectToClass(url) {
 new Swiper(".card-wrapper", {
   loop: true,
   spaceBetween: 30,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+    waitForTransition: true
+  },
+  speed: 800,
+  effect: 'slide',
 
   // If we need pagination
   pagination: {
@@ -112,7 +120,7 @@ new Swiper(".card-wrapper", {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
-  breakpoint: {
+  breakpoints: {
     0: {
       slidesPerView: 1,
     },
