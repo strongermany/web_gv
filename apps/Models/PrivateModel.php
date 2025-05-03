@@ -164,7 +164,12 @@ class PrivateModel extends DModel {
         $table = "slider_items";
         $cond = "item_id = :item_id";
         $params = [
-            'status' => $data['status'],
+            'category_id' => $data['category_id'],
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'image_url' => $data['image_url'],
+            'link_url' => $data['link_url'],
+            'status' => $data['status'] ?? 1,
             'item_id' => $data['item_id']
         ];
         return $this->db->update($table, $params, $cond);
@@ -195,6 +200,7 @@ class PrivateModel extends DModel {
             'title' => $data['title'],
             'content' => $data['content'],
             'category' => $data['category'],
+            'link_url' => isset($data['link_url']) ? $data['link_url'] : null,
             'image_url' => isset($data['image_url']) ? $data['image_url'] : null
         ];
         return $this->db->insert($table, $insertData);

@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("<?php echo Base_URL?>public/images/background.jpg") no-repeat;
+    background: url('../images/login.png') no-repeat;
     background-size: cover;
     background-position: center;
   }
