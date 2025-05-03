@@ -1,6 +1,8 @@
 <?php require_once 'apps/Views/header.php'; ?>
 <link rel="stylesheet" href="<?php echo Base_URL?>public/css/profile.css">
 
+
+
 <div class="profile-container">
     <div class="admin-info-header">
         <div class="admin-avatar">
@@ -132,7 +134,8 @@
             <div class="tab-pane" id="slider">
                 <div class="slider-management">
                     <h3>Quản lý slider</h3>
-                    <form action="<?php echo Base_URL; ?>PrivateController/addSliderItem" method="POST" enctype="multipart/form-data" class="slider-form">
+                    <button id="showAddSliderBtn" class="btn btn-primary" type="button">Thêm slider mới</button>
+                    <form id="addSliderForm" action="<?php echo Base_URL; ?>PrivateController/addSliderItem" method="POST" enctype="multipart/form-data" class="slider-form" style="display:none; margin-top:18px;">
                         <div class="form-group">
                             <label for="slider_category">Danh mục</label>
                             <select id="slider_category" name="category_id" required>
@@ -170,6 +173,7 @@
                                 <option value="0">Ẩn</option>
                             </select>
                         </div>
+                        <button type="button" class="btn btn-secondary" id="cancelAddSlider">Hủy</button>
                         <button type="submit" class="btn btn-primary">Thêm slider</button>
                     </form>
 
@@ -242,7 +246,8 @@
             <div class="tab-pane" id="news">
                 <div class="news-management">
                     <h3>Quản lý tin tức</h3>
-                    <form action="<?php echo Base_URL; ?>PrivateController/addNews" method="POST" enctype="multipart/form-data" class="news-form">
+                    <button id="showAddNewsBtn" class="btn btn-primary" type="button">Thêm tin tức mới</button>
+                    <form id="addNewsForm" action="<?php echo Base_URL; ?>PrivateController/addNews" method="POST" enctype="multipart/form-data" class="news-form" style="display:none; margin-top:18px;">
                         <div class="form-group">
                             <label for="news_title">Tiêu đề</label>
                             <input type="text" id="news_title" name="title" required>
@@ -262,12 +267,16 @@
                         </div>
                         <div class="form-group">
                             <label for="news_content">Nội dung</label>
-                            <textarea id="news_content" name="content" rows="5" required></textarea>
+                            <textarea id="news_content" name="content" rows="5" ></textarea>
                         </div>
                         <div class="form-group">
                             <label for="news_image">Hình ảnh</label>
                             <input type="file" id="news_image" name="image" accept="image/*">
                             <small class="form-text text-muted">Kích thước khuyến nghị: 800x600px</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="news_link_url">Đường dẫn liên kết</label>
+                            <input type="url" id="news_link_url" name="link_url" placeholder="https://...">
                         </div>
                         <div class="form-group">
                             <label for="news_status">Trạng thái</label>
@@ -276,6 +285,7 @@
                                 <option value="0">Ẩn</option>
                             </select>
                         </div>
+                        <button type="button" class="btn btn-secondary" id="cancelAddNews">Hủy</button>
                         <button type="submit" class="btn btn-primary">Thêm tin tức</button>
                     </form>
 
@@ -334,7 +344,8 @@
             <div class="tab-pane" id="courses">
                 <div class="courses-management">
                     <h3>Quản lý khóa học</h3>
-                    <form action="<?php echo Base_URL; ?>PrivateController/addCourse" method="POST" enctype="multipart/form-data" class="course-form">
+                    <button id="showAddCourseBtn" class="btn btn-primary" type="button">Thêm khóa học mới</button>
+                    <form id="addCourseForm" action="<?php echo Base_URL; ?>PrivateController/addCourse" method="POST" enctype="multipart/form-data" class="course-form" style="display:none; margin-top:18px;">
                         <div class="form-row">
                             <div class="form-group" style="flex:1; min-width: 250px;">
                                 <label for="course_title">Tên khóa học</label>
@@ -383,6 +394,7 @@
                             <label for="course_description">Mô tả khóa học</label>
                             <textarea id="course_description" name="description" rows="5" required></textarea>
                         </div>
+                        <button type="button" class="btn btn-secondary" id="cancelAddCourse">Hủy</button>
                         <button type="submit" class="btn btn-primary">Thêm khóa học</button>
                     </form>
 
@@ -442,6 +454,7 @@
     </div>
 </div>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-btn');
@@ -478,6 +491,53 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Khởi tạo CKEditor cho các textarea cần thiết
+    if (document.querySelector('#slider_content')) {
+        ClassicEditor.create(document.querySelector('#slider_content'), { language: 'vi' });
+    }
+    if (document.querySelector('#news_content')) {
+        ClassicEditor.create(document.querySelector('#news_content'), { language: 'vi' });
+    }
+    if (document.querySelector('#course_description')) {
+        ClassicEditor.create(document.querySelector('#course_description'), { language: 'vi' });
+    }
+
+    // Tự động chuyển tab nếu có anchor trên URL
+    const hash = window.location.hash;
+    if (hash) {
+        const tabBtn = document.querySelector('.tab-btn[data-tab="' + hash.replace('#', '') + '"]');
+        if (tabBtn) {
+            tabBtn.click();
+        }
+    }
+
+    // Toggle form thêm slider
+    const showAddSliderBtn = document.getElementById('showAddSliderBtn');
+    const addSliderForm = document.getElementById('addSliderForm');
+    const cancelAddSlider = document.getElementById('cancelAddSlider');
+    if (showAddSliderBtn && addSliderForm && cancelAddSlider) {
+        showAddSliderBtn.onclick = () => { addSliderForm.style.display = 'block'; showAddSliderBtn.style.display = 'none'; };
+        cancelAddSlider.onclick = () => { addSliderForm.style.display = 'none'; showAddSliderBtn.style.display = 'inline-block'; };
+    }
+
+    // Toggle form thêm tin tức
+    const showAddNewsBtn = document.getElementById('showAddNewsBtn');
+    const addNewsForm = document.getElementById('addNewsForm');
+    const cancelAddNews = document.getElementById('cancelAddNews');
+    if (showAddNewsBtn && addNewsForm && cancelAddNews) {
+        showAddNewsBtn.onclick = () => { addNewsForm.style.display = 'block'; showAddNewsBtn.style.display = 'none'; };
+        cancelAddNews.onclick = () => { addNewsForm.style.display = 'none'; showAddNewsBtn.style.display = 'inline-block'; };
+    }
+
+    // Toggle form thêm khóa học
+    const showAddCourseBtn = document.getElementById('showAddCourseBtn');
+    const addCourseForm = document.getElementById('addCourseForm');
+    const cancelAddCourse = document.getElementById('cancelAddCourse');
+    if (showAddCourseBtn && addCourseForm && cancelAddCourse) {
+        showAddCourseBtn.onclick = () => { addCourseForm.style.display = 'block'; showAddCourseBtn.style.display = 'none'; };
+        cancelAddCourse.onclick = () => { addCourseForm.style.display = 'none'; showAddCourseBtn.style.display = 'inline-block'; };
+    }
 });
 
 function updateStatus(select, itemId) {

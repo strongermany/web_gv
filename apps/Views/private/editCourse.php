@@ -92,6 +92,15 @@
     </div>
 </div>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector('#description')) {
+        ClassicEditor.create(document.querySelector('#description'), { language: 'vi' });
+    }
+});
+</script>
+
 <style>
 .edit-course-container {
     max-width: 800px;

@@ -265,6 +265,7 @@ class PrivateController extends DController {
                 'title' => trim($_POST['title']),
                 'category' => trim($_POST['category']),
                 'content' => trim($_POST['content']),
+                'link_url' => isset($_POST['link_url']) ? trim($_POST['link_url']) : '',
                 'status' => $_POST['status'],
                 'created_by' => $adminId,
                 'created_at' => date('Y-m-d H:i:s')
@@ -418,9 +419,9 @@ class PrivateController extends DController {
             }
 
             if ($this->privateModel->addSliderItem($data)) {
-                header('Location: ' . Base_URL . 'PrivateController?success=' . urlencode('Thêm slider thành công'));
+                header('Location: ' . Base_URL . 'PrivateController#slider?success=' . urlencode('Thêm slider thành công'));
             } else {
-                header('Location: ' . Base_URL . 'PrivateController?error=' . urlencode('Có lỗi xảy ra khi thêm slider'));
+                header('Location: ' . Base_URL . 'PrivateController#slider?error=' . urlencode('Có lỗi xảy ra khi thêm slider'));
             }
             exit;
         }

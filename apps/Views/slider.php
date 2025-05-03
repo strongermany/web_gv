@@ -9,6 +9,10 @@
     will-change: transform;
     height: 100%;
 }
+.cnn-slider-list.single-slide {
+    justify-content: center !important;
+    transform: none !important;
+}
 </style>
 
 <div class="cnn-slider-container">
@@ -18,7 +22,11 @@
             <img src="<?php echo Base_URL; ?>public/images/slider/<?php echo $item['image_url']; ?>" alt="<?php echo $item['title']; ?>">
             <div class="cnn-slider-overlay">
                 <div class="cnn-slider-title"><?php echo $item['title']; ?></div>
-                <div class="cnn-slider-desc"><?php echo $item['content']; ?></div>
+                <div class="cnn-slider-desc"><?php 
+                    $words = explode(' ', $item['content']);
+                    $short = implode(' ', array_slice($words, 0, 8));
+                    echo $short . (count($words) > 8 ? '...' : '');
+                ?></div>
                 <?php if (!empty($item['link_url'])): ?>
                 <a href="<?php echo $item['link_url']; ?>" class="cnn-slider-link" target="_blank">Xem chi tiết</a>
                 <?php endif; ?>
@@ -39,7 +47,6 @@
     const dotsWrap = document.getElementById('cnnSliderDots');
     let current = 0;
     let visible = getVisibleCards();
-    let isLooping = false;
 
     function getVisibleCards() {
         if (window.innerWidth <= 900) return 1;
@@ -49,70 +56,58 @@
 
     function updateSlider() {
         visible = getVisibleCards();
+        if (current > cards.length - visible) current = cards.length - visible;
+        if (current < 0) current = 0;
         const cardWidth = cards[0].offsetWidth + 32;
         list.style.transform = `translateX(-${current * cardWidth}px)`;
         dotsWrap.querySelectorAll('.cnn-slider-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === current);
         });
-        cards.forEach((card, i) => {
-            if (i === current) {
-                card.classList.add('active');
-            } else {
-                card.classList.remove('active');
-            }
-        });
+        if (cards.length <= visible) {
+            nextBtn.style.display = 'none';
+            dotsWrap.style.display = 'none';
+            list.classList.add('single-slide');
+            list.style.transform = 'none';
+        } else {
+            nextBtn.style.display = '';
+            dotsWrap.style.display = '';
+            list.classList.remove('single-slide');
+        }
     }
 
     function goTo(idx) {
         visible = getVisibleCards();
-        if (isLooping) return; // Ngăn chặn lặp nhiều lần
-        if (idx >= cards.length) {
-            isLooping = true;
-            list.style.transition = "transform 1s cubic-bezier(.4,0,.2,1)";
-            current = cards.length - 1;
-            updateSlider();
-            setTimeout(() => {
-                list.style.transition = "none";
-                current = 0;
-                updateSlider();
-                // Bật lại transition cho lần sau
-                setTimeout(() => {
-                    list.style.transition = "transform 1s cubic-bezier(.4,0,.2,1)";
-                    isLooping = false;
-                }, 50);
-            }, 1000); // 1s đúng bằng thời gian transition
-            return;
-        }
+        if (idx > cards.length - visible) idx = 0;
         if (idx < 0) idx = 0;
         current = idx;
         updateSlider();
     }
 
     nextBtn.onclick = () => goTo(current + 1);
-    // Dots
-    dotsWrap.innerHTML = '';
-    for (let i = 0; i < cards.length; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'cnn-slider-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => goTo(i);
-        dotsWrap.appendChild(dot);
-    }
-    // Auto slide
-    let auto = setInterval(() => goTo(current + 1), 5000);
-    list.onmouseenter = () => clearInterval(auto);
-    list.onmouseleave = () => auto = setInterval(() => goTo(current + 1), 5000);
-    // Responsive update
-    window.addEventListener('resize', () => {
-        visible = getVisibleCards();
+
+    function renderDots() {
         dotsWrap.innerHTML = '';
-        for (let i = 0; i < cards.length; i++) {
+        let dotCount = cards.length - visible + 1;
+        if (dotCount < 1) dotCount = 1;
+        for (let i = 0; i < dotCount; i++) {
             const dot = document.createElement('button');
             dot.className = 'cnn-slider-dot' + (i === current ? ' active' : '');
             dot.onclick = () => goTo(i);
             dotsWrap.appendChild(dot);
         }
+    }
+
+    let auto = setInterval(() => goTo(current + 1), 5000);
+    list.onmouseenter = () => clearInterval(auto);
+    list.onmouseleave = () => auto = setInterval(() => goTo(current + 1), 5000);
+
+    window.addEventListener('resize', () => {
+        visible = getVisibleCards();
+        renderDots();
         updateSlider();
     });
+
+    renderDots();
     updateSlider();
 })();
 </script>

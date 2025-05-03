@@ -426,39 +426,52 @@ body {
   margin-top: 12px;
 }
 
-.btn-buy {
-  flex: 2;
-  background: #a435f0;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s;
+.course-footer {
+  display: flex;
+  border-radius: 24px;
+  justify-content: flex-end;
+  align-items: center;
+  background: linear-gradient(90deg, #4f8cff 60%, #a435f0 100%);
+  padding: 0 0 0 16px;
+  gap: 10px;
+  min-height: 44px;
+  border-top: none;
+  margin-top: auto;
 }
 
-.btn-buy:hover {
-  background: #8710d8;
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-cart {
-  flex: 1;
-  background: white;
-  color: #1c1d1f;
-  border: 1px solid #1c1d1f;
-  padding: 12px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s;
+  width: 32px;
+  height: 32px;
+  font-size: 15px;
+  border-radius: 50%;
+  padding: 0;
 }
 
-.btn-cart:hover {
-  background: #1c1d1f;
-  color: white;
+.btn-buy {
+  min-width: 70px;
+  height: 32px;
+  font-size: 14px;
+  padding: 0 12px;
+  border-radius: 16px;
+}
+
+.btn-buy:hover {
+  background: linear-gradient(90deg, #4f8cff 60%, #a435f0 100%);
+  color: #fff;
+  transform: scale(1.05);
 }
 
 @media (max-width: 1200px) {
@@ -878,19 +891,21 @@ body {
 
 /* News Section Styles */
 .news-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%);
-    border-radius: 24px;
-    box-shadow: 0 4px 24px rgba(30, 41, 59, 0.08);
+    background: linear-gradient(135deg, #030303 0%, #376a9d 100%);
+    border-radius: 0px;
+    box-shadow: 0 4px 24px rgba(58, 63, 188, 0.13);
     padding: 32px 0 40px 0;
-    margin-bottom: 40px;
+    border: none;
+    margin-bottom: 0px;
 }
 .news-header h1 {
-    color: #222;
+    color: #fff;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 28px;
     letter-spacing: 1px;
     text-align: center;
+    text-shadow: 0 2px 8px rgba(58, 63, 188, 0.15);
 }
 .news-row {
     display: flex;
@@ -902,32 +917,34 @@ body {
     flex: 0 0 calc(33.333% - 22px);
     max-width: 370px;
     min-width: 220px;
-    background: #fff;
+    background: linear-gradient(135deg, #232946 60%, #16161a 100%);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(30, 41, 59, 0.08);
-    border: 1.5px solid #d1d5db;
+    box-shadow: 0 2px 16px rgba(58, 63, 188, 0.13);
+    border: none;
     position: relative;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s, transform 0.3s;
+    transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
 }
 .news-col:hover {
-    box-shadow: 0 8px 32px rgba(30, 41, 59, 0.13);
-    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(58, 63, 188, 0.18);
+    transform: translateY(-4px) scale(1.025);
+    background: linear-gradient(135deg, #3a3fbc 60%, #232946 100%);
 }
 .news-badge {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: #374151;
+    background: linear-gradient(90deg, #4f8cff 60%, #a435f0 100%);
     color: #fff;
-    padding: 6px 16px;
+    padding: 6px 18px;
     border-radius: 20px;
     font-weight: 700;
     font-size: 14px;
-    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.08);
+    box-shadow: 0 2px 8px rgba(80, 112, 255, 0.13);
     letter-spacing: 0.5px;
+    text-shadow: 0 1px 4px rgba(80,112,255,0.10);
 }
 .news-image {
     width: 100%;
@@ -948,14 +965,14 @@ body {
     flex: 1;
 }
 .news-content h3 {
-    color: #222;
+    color: #a8b4fa;
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1.4;
 }
 .news-text {
-    color: #334155;
+    color: #e0e7ff;
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 12px;
@@ -966,14 +983,14 @@ body {
     align-items: center;
     margin-bottom: 10px;
     font-size: 13px;
-    color: #374151;
+    color: #b6caff;
 }
 .news-actions {
     display: flex;
     gap: 10px;
     margin-top: 10px;
     padding-top: 10px;
-    border-top: 1px solid #ede9fe;
+    border-top: 1px solid #232946;
 }
 .like-btn {
     flex: 1;
@@ -985,24 +1002,27 @@ body {
     border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
-    color: #222;
-    background: #f3f4f6;
-    border: 1px solid #d1d5db;
+    color: #fff;
+    background: linear-gradient(90deg, #4f8cff 60%, #a435f0 100%);
+    border: none;
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
+    box-shadow: 0 2px 8px rgba(80,112,255,0.08);
 }
 .like-btn:hover {
-    background: #222;
+    background: linear-gradient(90deg, #a435f0 60%, #4f8cff 100%);
     color: #fff;
+    transform: scale(1.05);
 }
 .like-btn.details {
-    background: #374151;
-    color: white;
-    border: none;
+    background: #232946;
+    color: #a8b4fa;
+    border: 1px solid #4f8cff;
 }
 .like-btn.details:hover {
-    background: #111827;
+    background: #4f8cff;
+    color: #fff;
 }
 @media (max-width: 1200px) {
     .news-col {
@@ -1026,34 +1046,40 @@ body {
 /* Courses Section Styles */
 .courses-section {
     padding: 60px 0;
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #181c2f 0%, #232946 60%, #376a9d 100%);
+    padding: 0px 0px 40px 0px;
+    
 }
 
 .courses-header {
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
+    background: linear-gradient(90deg, #232946 60%, #3a3fbc 100%);
+   
+    box-shadow: 0 4px 24px rgba(58, 63, 188, 0.10);
+    padding: 32px 0px 0px 0px;
+    margin-bottom: 30px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
 }
 
 .header-content h1 {
     font-size: 32px;
-    color: #1c1d1f;
+    color: #fff;
     margin-bottom: 10px;
+    text-shadow: 0 2px 8px rgba(225, 225, 225, 0.18);
 }
 
 .header-content p {
-    color: #6a6f73;
+    color: #a8b4fa;
     font-size: 16px;
 }
 
 .header-actions {
     display: flex;
-    gap: 15px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 18px;
+    margin-top: 18px;
+    width: 100%;
 }
 
 .search-box {
@@ -1097,31 +1123,33 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
     margin-bottom: 40px;
+    background: transparent;
 }
 
 .course-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #d1d7dc;
+    background: linear-gradient(135deg, #232946 60%, #16161a 100%);
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(58, 63, 188, 0.13);
+    border: 1.5px solid #393e46;
+    color: #e0e7ff;
+    transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(58, 63, 188, 0.18);
+    transform: translateY(-4px) scale(1.025);
+    background: linear-gradient(135deg, #3a3fbc 60%, #232946 100%);
 }
 
 .course-image {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%;
     overflow: hidden;
-    background: #f8f9fa;
+    background: #232946;
 }
 
 .course-image img {
@@ -1153,7 +1181,7 @@ body {
 .course-title {
     font-size: 18px;
     font-weight: 600;
-    color: #1c1d1f;
+    color: #e0e7ff;
     margin-bottom: 8px;
     line-height: 1.4;
     display: -webkit-box;
@@ -1163,7 +1191,7 @@ body {
 }
 
 .course-instructor {
-    color: #6a6f73;
+    color: #b6caff;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -1195,12 +1223,12 @@ body {
 }
 
 .rating-text {
-    color: #6a6f73;
+    color: #e0e7ff;
     font-size: 14px;
 }
 
 .course-description {
-    color: #1c1d1f;
+    color: #e0e7ff;
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -1212,68 +1240,44 @@ body {
 
 .course-footer {
     display: flex;
-    justify-content: space-between;
+    border-radius: 24px;
+    justify-content: flex-end;
     align-items: center;
-    padding-top: 15px;
-    border-top: 1px solid #d1d7dc;
+    background: linear-gradient(90deg, #4f8cff 60%, #a435f0 100%);
+    padding: 0 0 0 16px;
+    gap: 10px;
+    min-height: 44px;
+    border-top: none;
     margin-top: auto;
 }
 
 .price-section {
     display: flex;
     align-items: center;
-    gap: 8px;
-}
-
-.original-price {
-    color: #6a6f73;
-    text-decoration: line-through;
-    font-size: 14px;
-}
-
-.discounted-price, .current-price {
-    color: #1c1d1f;
-    font-size: 20px;
-    font-weight: 700;
+    gap: 6px;
+    margin-right: 10px;
 }
 
 .action-buttons {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
 }
 
 .btn-cart {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    border: 1px solid #1c1d1f;
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
     border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-cart:hover {
-    background: #1c1d1f;
-    color: white;
+    padding: 0;
 }
 
 .btn-buy {
-    padding: 10px 20px;
-    background: #a435f0;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-weight: 600;
+    min-width: 70px;
+    height: 32px;
     font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-buy:hover {
-    background: #8710d8;
+    padding: 0 12px;
+    border-radius: 16px;
 }
 
 .discount-badge {
@@ -1300,23 +1304,38 @@ body {
     }
 
     .course-footer {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        gap: 8px;
+        min-height: 38px;
+        padding: 0 0 0 8px;
     }
 
-    .action-buttons {
-        width: 100%;
+    .btn-cart, .btn-buy {
+        height: 28px;
+        min-width: 60px;
+        font-size: 13px;
+    }
+
+    .btn-cart {
+        width: 28px;
+        font-size: 13px;
     }
 
     .btn-buy {
-        flex: 1;
+        padding: 0 8px;
+        border-radius: 12px;
+    }
+
+    .price-section {
+        margin-right: 6px;
+        gap: 4px;
     }
 }
 
 /* Categories Section */
 .categories-section {
     padding: 60px 0;
-    background: white;
+    background: linear-gradient(180deg, #232946 0%, #c7d2fe 100%);
 }
 
 .categories-header {
@@ -1342,35 +1361,40 @@ body {
 .category-card {
     text-align: center;
     padding: 30px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    transition: transform 0.3s;
+    background: linear-gradient(135deg, #f8fafc 60%, #e0e7ff 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(80,112,255,0.10);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .category-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(80,112,255,0.16);
+    background: linear-gradient(135deg, #e0e7ff 60%, #c7d2fe 100%);
 }
 
 .category-card i {
-    font-size: 40px;
+    font-size: 44px;
     color: #a435f0;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .category-card h3 {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #1c1d1f;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #232946;
+    font-weight: 700;
 }
 
 .category-card p {
-    color: #6a6f73;
+    color: #4f8cff;
+    font-size: 16px;
 }
 
 /* Features Section */
 .features-section {
     padding: 60px 0;
-    background: #f8f9fa;
+    background: linear-gradient(180deg, #c7d2fe 0%, #e0e7ff 100%);
 }
 
 .features-header {
@@ -1680,4 +1704,18 @@ body {
     background-color: rgba(0, 102, 204, 0.05) !important;
     padding-left: 30px !important;
   }
+}
+
+.timetable-section {
+    background: #000000;
+    padding: 60px 0 60px 0;
+}
+.news-header, .courses-header, .categories-header, .features-header {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+}
+.news-header.animate-in, .courses-header.animate-in, .categories-header.animate-in, .features-header.animate-in {
+  opacity: 1;
+  transform: translateX(0);
 }

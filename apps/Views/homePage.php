@@ -62,21 +62,21 @@
 <section class="courses-section">
     <div class="courses-header">
         <div class="header-content">
-            <h1>Featured Courses</h1>
-            <p>Explore our most popular courses and start learning today</p>
+            <h1>Khóa học nổi bật</h1>
+            <p>Khám phá các khóa học phổ biến nhất và bắt đầu học ngay hôm nay</p>
         </div>
-        <div class="header-actions">
+        <div class="header-actions" style="flex-direction: row-reverse;">
             <div class="search-box">
-                <input type="text" placeholder="Search for courses...">
+                <input type="text" placeholder="Tìm kiếm khóa học...">
                 <button><i class="fas fa-search"></i></button>
             </div>
             <div class="filter-options">
                 <select>
-                    <option value="">All Categories</option>
-                    <option value="web">Web Development</option>
-                    <option value="mobile">Mobile Development</option>
-                    <option value="data">Data Science</option>
-                    <option value="design">Design</option>
+                    <option value="">Tất cả lĩnh vực</option>
+                    <option value="web">Lập trình Web</option>
+                    <option value="mobile">Lập trình di động</option>
+                    <option value="data">Khoa học dữ liệu</option>
+                    <option value="design">Thiết kế</option>
                 </select>
             </div>
         </div>
@@ -197,29 +197,29 @@
 <!-- Course Categories Section -->
 <section class="categories-section">
     <div class="categories-header">
-        <h2>Explore Different Training Fields</h2>
-        <p>Choose from a wide range of courses in various domains</p>
+        <h2>Khám phá các lĩnh vực đào tạo</h2>
+        <p>Lựa chọn từ nhiều khóa học thuộc các lĩnh vực khác nhau</p>
     </div>
     <div class="categories-grid">
         <div class="category-card">
             <i class="fas fa-code"></i>
-            <h3>Web Development</h3>
-            <p>Master modern web technologies</p>
+            <h3>Lập trình Web</h3>
+            <p>Thành thạo công nghệ web hiện đại</p>
         </div>
         <div class="category-card">
             <i class="fas fa-mobile-alt"></i>
-            <h3>Mobile Development</h3>
-            <p>Build apps for iOS and Android</p>
+            <h3>Lập trình di động</h3>
+            <p>Xây dựng ứng dụng cho iOS và Android</p>
         </div>
         <div class="category-card">
             <i class="fas fa-database"></i>
-            <h3>Data Science</h3>
-            <p>Analyze and visualize data</p>
+            <h3>Khoa học dữ liệu</h3>
+            <p>Phân tích và trực quan hóa dữ liệu</p>
         </div>
         <div class="category-card">
             <i class="fas fa-palette"></i>
-            <h3>Design</h3>
-            <p>Create beautiful user interfaces</p>
+            <h3>Thiết kế</h3>
+            <p>Tạo giao diện người dùng đẹp mắt</p>
         </div>
     </div>
 </section>
@@ -227,41 +227,35 @@
 <!-- Features Section -->
 <section class="features-section">
     <div class="features-header">
-        <h2>Why Choose Our Platform</h2>
-        <p>Discover the benefits of learning with us</p>
+        <h2>Tại sao chọn nền tảng của chúng tôi</h2>
+        <p>Khám phá những lợi ích khi học cùng chúng tôi</p>
     </div>
     <div class="features-grid">
         <div class="feature-card">
             <i class="fas fa-graduation-cap"></i>
-            <h3>Expert Instructors</h3>
-            <p>Learn from industry professionals with years of experience</p>
+            <h3>Giảng viên chuyên gia</h3>
+            <p>Học cùng các chuyên gia trong ngành với nhiều năm kinh nghiệm</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-clock"></i>
-            <h3>Flexible Learning</h3>
-            <p>Study at your own pace, anywhere and anytime</p>
+            <h3>Linh hoạt thời gian</h3>
+            <p>Chủ động học tập mọi lúc, mọi nơi, theo tốc độ của bạn</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-certificate"></i>
-            <h3>Certificates</h3>
-            <p>Earn recognized certificates upon completion</p>
+            <h3>Chứng chỉ uy tín</h3>
+            <p>Nhận chứng chỉ được công nhận sau khi hoàn thành</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-comments"></i>
-            <h3>Community Support</h3>
-            <p>Connect with fellow learners and get help when needed</p>
+            <h3>Hỗ trợ cộng đồng</h3>
+            <p>Kết nối với học viên khác và nhận hỗ trợ khi cần thiết</p>
         </div>
     </div>
 </section>
 
 <!-- Call to Action Section -->
-<section class="cta-section">
-    <div class="cta-content">
-        <h2>Start Your Learning Journey Today</h2>
-        <p>Join thousands of students who are already learning and growing with our courses</p>
-        <button class="cta-button">Register Now</button>
-    </div>
-</section>
+
 
 <script>
     // Smooth scroll for navigation
@@ -324,4 +318,19 @@
   function hideMenu() {
     navLinks.style.right = "-200px";
   }
+</script>
+
+<script>
+// Animation header xuất hiện khi scroll (liên tục)
+const sectionHeaders = document.querySelectorAll('.news-header, .courses-header, .categories-header, .features-header');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        } else {
+            entry.target.classList.remove('animate-in');
+        }
+    });
+}, { threshold: 0.3 });
+sectionHeaders.forEach(header => observer.observe(header));
 </script>

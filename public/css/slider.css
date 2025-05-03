@@ -11,7 +11,7 @@
         0 1.5px 4px 0 rgba(30, 41, 59, 0.04),
         0 -2px 24px 0 rgba(255, 255, 255, 0.18) inset;
     border: 2.5px solid #d1d5db;
-    padding: 24px 5vw 32px 5vw;
+    padding: 24px 0 32px 0;
     position: relative;
 }
 .cnn-slider-container::before {

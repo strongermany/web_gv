@@ -27,7 +27,7 @@
     <?php endif; ?>
 
     <div class="edit-news-form">
-        <form action="<?php echo Base_URL; ?>EditNewsController/update/<?php echo $data['news']['news_id']; ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo Base_URL; ?>EditNewsController/update/<?php echo $data['news']['news_id']; ?>" method="POST" enctype="multipart/form-data" id="newsForm">
             <div class="form-group">
                 <label for="title">Tiêu đề</label>
                 <input type="text" id="title" name="title" value="<?php echo $data['news']['title']; ?>" required>
@@ -35,7 +35,7 @@
 
             <div class="form-group">
                 <label for="content">Nội dung</label>
-                <textarea id="content" name="content" rows="6" required><?php echo $data['news']['content']; ?></textarea>
+                <textarea id="content" name="content" required><?php echo $data['news']['content']; ?></textarea>
             </div>
 
             <div class="form-group">
@@ -77,6 +77,29 @@
         </form>
     </div>
 </div>
+
+<!-- Add CKEditor Script -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#content'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'],
+            language: 'vi'
+        })
+        .then(editor => {
+            console.log('Editor was initialized', editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Ensure form submission works with CKEditor
+    document.getElementById('newsForm').addEventListener('submit', function(e) {
+        // The form will automatically include the CKEditor content
+        // No additional handling needed as CKEditor automatically updates the textarea
+    });
+</script>
+
 
 <style>
 .edit-news-container {
@@ -206,4 +229,3 @@
 }
 </style>
 
-<?php require_once 'apps/Views/footer.php'; ?> 

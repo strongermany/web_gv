@@ -17,12 +17,37 @@ class editSliderController extends DController {
             header('Location: ' . Base_URL . 'SliderController');
             exit;
         }
+
+        // Get admin info from session
+        $adminId = Session::get('Admin_Id');
+        if (!$adminId) {
+            header('Location: ' . Base_URL . 'index/login');
+            exit;
+        }
+
+        // Get admin details
+        $adminInfo = $this->sliderModel->getAdminInfo($adminId);
+        if (empty($adminInfo)) {
+            header('Location: ' . Base_URL . 'index/login');
+            exit;
+        }
+
+        // Get necessary data for header
+        $homemodel = $this->load->model('HomeModel');
         $categories = $this->sliderModel->getAllCategories();
+        
         $data = [
+            'admin' => (object)$adminInfo[0],
+            'list' => $homemodel->listClass('tbl_object'),
+            'page' => 'slider',
+            'title' => 'Chỉnh sửa slider',
             'slider' => $slider[0],
             'categories' => $categories
         ];
+
+        $this->load->view('header', $data);
         $this->load->view('private/edit_slider', $data);
+        $this->load->view('footer');
     }
 
     // Xử lý cập nhật slider
@@ -42,8 +67,10 @@ class editSliderController extends DController {
                 'title' => $_POST['title'],
                 'content' => $_POST['content'],
                 'link_url' => $_POST['link_url'],
-                'image_url' => $slider['image_url'] // giữ ảnh cũ nếu không có ảnh mới
+                'image_url' => $slider['image_url'], // giữ ảnh cũ nếu không có ảnh mới
+                'status' => $slider['status'] // giữ trạng thái cũ
             ];
+
             // Xử lý upload ảnh mới nếu có
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
                 $image = $this->uploadImage($_FILES['image'], 'slider');
@@ -55,6 +82,7 @@ class editSliderController extends DController {
                     $data['image_url'] = $image;
                 }
             }
+
             if ($this->sliderModel->updateSliderItem($data)) {
                 $_SESSION['success'] = 'Cập nhật slider thành công';
                 header('Location: ' . Base_URL . 'PrivateController');

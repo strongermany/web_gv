@@ -1,47 +1,89 @@
 .timetable-container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(30,41,59,0.10);
+    max-width: 2200px;
+    margin: 40px auto 0 auto; 
+    background: linear-gradient(180deg, #d1c7fe 0%, #030303 100%);
+    box-shadow: none;
     padding: 32px 24px 24px 24px;
+    animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1);
+    border: none;
 }
 .timetable-container h1 {
     text-align: center;
-    color: #222;
-    font-size: 2rem;
+    color: #2d3a4a;
+    font-size: 2.2rem;
     margin-bottom: 28px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(80,112,255,0.08);
 }
 .timetable {
     width: 100%;
     border-collapse: separate;
+    
     border-spacing: 0;
-    background: #f8fafc;
-    border-radius: 12px;
+    background: #f1f5ff;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(30,41,59,0.06);
+    box-shadow: 0 2px 12px rgba(80,112,255,0.08);
+    animation: fadeIn 1.2s cubic-bezier(.4,0,.2,1);
 }
 .timetable th, .timetable td {
-    padding: 14px 12px;
+    padding: 16px 14px;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    transition: background 0.3s, color 0.3s;
 }
 .timetable th {
-    background: #e5e7eb;
-    color: #222;
-    font-weight: 700;
-    border-bottom: 2px solid #d1d5db;
+    background: linear-gradient(90deg, #4f8cff 60%, #6ee7b7 100%);
+    color: #fff;
+    font-weight: 800;
+    border-bottom: none;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 4px rgba(80,112,255,0.10);
 }
 .timetable td {
     background: #fff;
-    color: #374151;
-    border-bottom: 1px solid #e5e7eb;
+    color: #2d3a4a;
+    border-bottom: none;
+    font-weight: 500;
 }
 .timetable tr:last-child td {
     border-bottom: none;
 }
+
+/* Hover Animation */
+.timetable tbody tr {
+    transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
+    cursor: pointer;
+}
+.timetable tbody tr:hover {
+    background: linear-gradient(90deg, #e0e7ff 60%, #f0fdfa 100%);
+    box-shadow: 0 4px 16px rgba(80,112,255,0.10);
+    transform: scale(1.012);
+}
+
+/* Table Fade In Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @media (max-width: 700px) {
     .timetable-container {
         padding: 12px 2vw;
